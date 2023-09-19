@@ -1,0 +1,3584 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Panificador SOLUTION",
+    "description": "Panificador solution",
+    "license": {
+      "name": "MDxBlocks",
+      "url": "https://www.firstgen.io"
+    }
+  },
+  "host": "20.51.241.42:5000",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Panificador SOLUTION APIs",
+      "description": "APIs to manage helps organization to connect their existing legacy system with Blockchain to track and trace product and to avoid their counterfeit."
+    },
+    {
+      "name": "Login",
+      "description": "Login to the application with Credentails"
+    },
+    {
+      "name": "Organization",
+      "description": "Create & Get  Organization (Participant)"
+    },
+    {
+      "name": "User",
+      "description": "Create & Get  User"
+    },
+    {
+      "name": "Product",
+      "description": "Create & Get  Product"
+    },
+    {
+      "name": "PO",
+      "description": "Create & Get  Purchase Order"
+    },
+    {
+      "name": "DN",
+      "description": "Create & Get  Dispatch Note"
+    },
+    {
+      "name": "Upload",
+      "description": "upload a document"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "api_key": {
+      "type": "apiKey",
+      "name": "authorization",
+      "in": "header"
+    }
+  },
+  "paths": {
+    "/login": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "summary": "Authenticate User - Working",
+        "description": "API to authenticate User based on User ID and Password you will provide in Smartbolt application. This api returns the request status and error description if User not exist or password not mached . API will return a Bearer token which will be used to call other APIs & also return user details along with token",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "formData",
+            "description": "Enter UserId",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "in": "formData",
+            "description": "Enter password",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "consumes": [
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "User authenticated successfully",
+            "schema": {
+              "$ref": "#/definitions/authenticateRes"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/api/organization": {
+      "post": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "Create Organization (Participant)  - Working",
+        "description": "API to Create organization details in Smartbolt application. This API returns the OrgnizationID on success and error description with 400 status messagge if request fails to create organization details. ",
+        "parameters": [
+          {
+            "name": "Request body",
+            "in": "body",
+            "description": "Create Organization (Participant)",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/onboardOrganization"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Organization Created Successfully",
+            "schema": {
+              "$ref": "#/definitions/CreateOrganizationResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorOrganizationResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/organizationById/{organizationById}": {
+      "get": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "Get Organizations details by ID - working",
+        "description": "API to get the registered organization details based on the organization identifier in Smartbolt application",
+        "parameters": [
+          {
+            "name": "organizationById",
+            "in": "path",
+            "type": "string",
+            "description": "Enter organizationId value",
+            "required": true
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Organization details fetched successfully",
+            "schema": {
+              "$ref": "#/definitions/getOrganizationByIdResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/organizations": {
+      "get": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "Get All Organization - working",
+        "description": "API to get all registered organizations details based on the organization identifier in Smartbolt application",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Organization details fetched successfully",
+            "schema": {
+              "$ref": "#/definitions/getAllOrganizationResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/organizationByType/{organizationType}": {
+      "get": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "Get Organization by Type - working",
+        "description": "API to get all registered organizations details based on the organization identifier in Smartbolt application",
+        "parameters": [
+          {
+            "name": "organizationType",
+            "in": "path",
+            "type": "string",
+            "description": "Enter organizationId value",
+            "required": true
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Organization details fetched successfully",
+            "schema": {
+              "$ref": "#/definitions/getAllOrganizationResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/sendEmailFromUI": {
+      "post": {
+        "tags": [
+          "Organization"
+        ],
+        "summary": "Sen Email",
+        "description": " ",
+        "parameters": [
+          {
+            "name": "Request body",
+            "in": "body",
+            "description": "Send email from UI",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/sendEmailFromUI"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Organization Created Successfully",
+            "schema": {
+              "$ref": "#/definitions/CreateOrganizationResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ErrorOrganizationResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/registerUser": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Register new Users  - working",
+        "description": "API for user registration in Smartbolt application. This API enables to register one or more user through the same request, which helps organization to perform multiple user registration by single api call. This API returns individual registration status for all the registered users. ",
+        "parameters": [
+          {
+            "name": "Request Body",
+            "in": "body",
+            "description": "Define the request body according to the given sample for registering new Users",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/onboardUser"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Users enrolled successfully",
+            "schema": {
+              "$ref": "#/definitions/onboardOrganizationsResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/user/{userId}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get User details by ID",
+        "description": "API to get the User details",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "type": "string",
+            "description": "Enter userId value",
+            "required": true
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "User details fetched successfully",
+            "schema": {
+              "$ref": "#/definitions/getUserByIdResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get All Users ",
+        "description": "API to get all Users details ",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Users details fetched successfully",
+            "schema": {
+              "$ref": "#/definitions/getAllUsersResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/queryUserByOrganizationID/{orgId}": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get User details by Orgnization ID",
+        "description": "API to get the User by Orgnizationdetails",
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "type": "string",
+            "description": "Enter orgId value",
+            "required": true
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "User details fetched successfully",
+            "schema": {
+              "$ref": "#/definitions/getUserByOrgIdResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/changeUserPassword": {
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Change User Password  - not tested",
+        "description": "API for changing User Password.",
+        "parameters": [
+          {
+            "name": "Request Body",
+            "in": "body",
+            "description": "Define the request body according to the given sample for changing password",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/changeUserPassword"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Password changed successfully",
+            "schema": {
+              "$ref": "#/definitions/onboardOrganizationsResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/resetUserPassword": {
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Reset User Password Not Tested",
+        "description": "API for password reset.",
+        "parameters": [
+          {
+            "name": "Request Body",
+            "in": "body",
+            "description": "Define the request body according to the given sample for password reset",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/resetUserPassword"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Password Reset enrolled successfully",
+            "schema": {
+              "$ref": "#/definitions/onboardOrganizationsResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/product": {
+      "post": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Create Product",
+        "description": "API to Create Product - Only Manufacturer can create Product. ",
+        "parameters": [
+          {
+            "name": "Request body",
+            "in": "body",
+            "description": "Product Values",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/createProduct"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Product Successfully",
+            "schema": {
+              "$ref": "#/definitions/sucessProductResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/errorProductResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/productStock": {
+      "put": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Update Product stock",
+        "description": "API to Update Product stock by increasing existing quantity with given quantity.",
+        "parameters": [
+          {
+            "name": "Request body",
+            "in": "body",
+            "description": "Product stock values",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/updateProduct"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Product Stock Updated Successfully",
+            "schema": {
+              "$ref": "#/definitions/sucessProductStockResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/errorProductStockResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/product/{productID}": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Get Product By productID",
+        "description": "API to Get Product By productID",
+        "parameters": [
+          {
+            "name": "productID",
+            "in": "path",
+            "type": "string",
+            "description": "Enter productID Value",
+            "required": true
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Product fetched successsfully",
+            "schema": {
+              "$ref": "#/definitions/getProductByIdResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/products": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Get All Products",
+        "description": "API to get all Products",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Products details fetched successfully",
+            "schema": {
+              "$ref": "#/definitions/getAllProductsResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/getProductByOrgID/{orgId}": {
+      "get": {
+        "tags": [
+          "Product"
+        ],
+        "summary": "Get Product details by Orgnization ID",
+        "description": "API to get the Product by Orgnizationdetails",
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "type": "string",
+            "description": "Enter orgId value",
+            "required": true
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Product details fetched successfully",
+            "schema": {
+              "$ref": "#/definitions/getProductByOrgIdResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/purchaseOrder": {
+      "post": {
+        "tags": [
+          "PO"
+        ],
+        "summary": "Create Purchase Order",
+        "description": "API to Create Purchase Order in Smartbolt application. UI will add Prefix PO-OPR-ENG to the PO# coming from Operator ERP. This API returns the POID on success and error description with 400 status messagge if request fails to create Purchase Order. ",
+        "parameters": [
+          {
+            "name": "Request body",
+            "in": "body",
+            "description": "Purchase Order values",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/createPurchaseOrder"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Purchase Order Successfully",
+            "schema": {
+              "$ref": "#/definitions/sucessPurchaseOrderResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/errorPurchaseOrderResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/purchaseOrder ": {
+      "put": {
+        "tags": [
+          "PO"
+        ],
+        "summary": "Update Purchase Order - Not Tested",
+        "description": "API to Update Purchase Order in Smartbolt application. This API returns POId on success and error description with 400 status messagge if request fails to create Purchase Order. ",
+        "parameters": [
+          {
+            "name": "Request body",
+            "in": "body",
+            "description": "Purchase Order values",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/updatePurchaseOrder"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Purchase Order Updated Successfully",
+            "schema": {
+              "$ref": "#/definitions/sucessPurchaseOrderResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/errorPurchaseOrderResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/acceptPO": {
+      "post": {
+        "tags": [
+          "PO"
+        ],
+        "summary": "Accept PO",
+        "description": "API to Accept Purchase Order in Smartbolt application.",
+        "parameters": [
+          {
+            "name": "Request body",
+            "in": "body",
+            "description": "Accept Order Values",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/accpetOrder"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Purchase Order Updated Successfully",
+            "schema": {
+              "$ref": "#/definitions/sucessPurchaseOrderResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/errorPurchaseOrderResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/rejectPO": {
+      "post": {
+        "tags": [
+          "PO"
+        ],
+        "summary": "Reject PO Working",
+        "description": "API to Reject the Purchase Order in Smartbolt application.",
+        "parameters": [
+          {
+            "name": "Request body",
+            "in": "body",
+            "description": "Reject Order Values",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/accpetOrder"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Purchase Order Updated Successfully",
+            "schema": {
+              "$ref": "#/definitions/sucessPurchaseOrderResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/errorPurchaseOrderResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/getPOByOrgID/{orgId}": {
+      "get": {
+        "tags": [
+          "PO"
+        ],
+        "summary": "Get PurchaseOrder for Organization ID - Tested",
+        "description": "API to get the Purchase Order by POID",
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "type": "string",
+            "description": "Enter orgId Value",
+            "required": true
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Purchase Order fetched successsfully",
+            "schema": {
+              "$ref": "#/definitions/getPurchaseOrderByIdResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/getPOByStatus/{status}": {
+      "get": {
+        "tags": [
+          "PO"
+        ],
+        "summary": "Get PurchaseOrder by status - Tested",
+        "description": "API to get the Purchase Order by POID",
+        "parameters": [
+          {
+            "name": "status",
+            "in": "path",
+            "type": "string",
+            "description": "Enter status Value - Created, Accepted , Rejected",
+            "required": true
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Purchase Order fetched successsfully",
+            "schema": {
+              "$ref": "#/definitions/getPurchaseOrderByIdResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/getAllPurchaseOrder": {
+      "get": {
+        "tags": [
+          "PO"
+        ],
+        "summary": "Get PurchaseOrder - Not working",
+        "description": "API to get All Purchase Order",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "All Purchase Orders",
+            "schema": {
+              "$ref": "#/definitions/getAllPurchaseOrderResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/getPOByRefPOID/{poID}": {
+      "get": {
+        "tags": [
+          "PO"
+        ],
+        "summary": "Get Reference if any PO details",
+        "description": "API to get All Purchase Order",
+        "parameters": [
+          {
+            "name": "poID",
+            "in": "path",
+            "type": "string",
+            "description": "Enter orgId Value",
+            "required": true
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Reference PO details",
+            "schema": {
+              "$ref": "#/definitions/getAllPurchaseOrderResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/dispatchNote": {
+      "post": {
+        "tags": [
+          "DN"
+        ],
+        "summary": "Create Dispatch Note - Tested",
+        "description": "API to Create Dispatch Note in Smartbolt application.",
+        "parameters": [
+          {
+            "name": "destinationOrgId",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "invoiceNumber",
+            "in": "formData",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "refPOID",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "transporterID",
+            "in": "formData",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "transporterName",
+            "in": "formData",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "productID",
+            "in": "formData",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "poNumber",
+            "in": "formData",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "productDesc",
+            "in": "formData",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "heatIndex",
+            "in": "formData",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "labCert",
+            "in": "formData",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "quantity",
+            "in": "formData",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "UOM",
+            "in": "formData",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "rawmaterialSourcing",
+            "in": "formData",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "comments",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "createdDate",
+            "in": "formData",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "certFile",
+            "in": "formData",
+            "required": true,
+            "type": "file"
+          },
+          {
+            "name": "ReceiptNo",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ReceiptDate",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "OriginatorCNPJ",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "FarmersName",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "FarmersCPF",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "productType",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ProcessedSeedWeight",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "SiloCode",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "KML",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "NitrogenRecommended",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          }
+
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Dispatch Note created Successfully",
+            "schema": {
+              "$ref": "#/definitions/sucessDisptachNoteResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/errorPurchaseOrderResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/dispatchNote ": {
+      "put": {
+        "tags": [
+          "DN"
+        ],
+        "summary": "Update Dispatch Note - Tested",
+        "description": "API to Update DN Comments only in Smartbolt application. ",
+        "parameters": [
+          {
+            "name": "Request body",
+            "in": "body",
+            "description": "Dispatch Note ID and Comments",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/updateDispatchNoteComment"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "DispatchNote Updated Successfully",
+            "schema": {
+              "$ref": "#/definitions/sucessPurchaseOrderResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/errorPurchaseOrderResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/acceptDispatchNote": {
+      "post": {
+        "tags": [
+          "DN"
+        ],
+        "summary": "Accept DispatchNote - Tested",
+        "description": "API to Accept DispatchNote in Smartbolt application.",
+        "parameters": [
+          {
+            "name": "Request body",
+            "in": "body",
+            "description": "Accept DispatchNote Values",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/accept-rejectDN"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "DispatchNote Updated Successfully",
+            "schema": {
+              "$ref": "#/definitions/sucessPurchaseOrderResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/errorPurchaseOrderResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/rejectDispatchNote": {
+      "post": {
+        "tags": [
+          "DN"
+        ],
+        "summary": "Reject DispatchNote - Tested",
+        "description": "API to Reject the DispatchNote in Smartbolt application.",
+        "parameters": [
+          {
+            "name": "Request body",
+            "in": "body",
+            "description": "Reject DispatchNote Values",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/accept-rejectDN"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "DispatchNote Updated Successfully",
+            "schema": {
+              "$ref": "#/definitions/sucessPurchaseOrderResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/errorPurchaseOrderResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/recallDispatchNote": {
+      "post": {
+        "tags": [
+          "DN"
+        ],
+        "summary": "Recall DispatchNote",
+        "description": "API to Reject the DispatchNote in Smartbolt application.",
+        "parameters": [
+          {
+            "name": "Request body",
+            "in": "body",
+            "description": "Reject DispatchNote Values",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/accept-rejectDN"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "DispatchNote Updated Successfully",
+            "schema": {
+              "$ref": "#/definitions/sucessPurchaseOrderResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/errorPurchaseOrderResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/shipDispatchNote": {
+      "post": {
+        "tags": [
+          "DN"
+        ],
+        "summary": "DispatchNote Shipped- Tested",
+        "description": "API to updaate the DispatchNote to Shipped in Smartbolt application.",
+        "parameters": [
+          {
+            "name": "Request body",
+            "in": "body",
+            "description": "DispatchNote status to Shipped Status",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/accept-rejectDN"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "DispatchNote Updated Successfully",
+            "schema": {
+              "$ref": "#/definitions/sucessPurchaseOrderResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/errorPurchaseOrderResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/getDispatchNoteByOrgID/{orgId}": {
+      "get": {
+        "tags": [
+          "DN"
+        ],
+        "summary": "Get DispatchNote for Organization ID - Tested",
+        "description": "API to get the DispatchNote by Login OrganizationID",
+        "parameters": [
+          {
+            "name": "orgId",
+            "in": "path",
+            "type": "string",
+            "description": "Enter orgId Value",
+            "required": true
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "DispatchNote fetched successsfully",
+            "schema": {
+              "$ref": "#/definitions/getPurchaseOrderByIdResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/getDispatchNoteByStatus/{status}": {
+      "get": {
+        "tags": [
+          "DN"
+        ],
+        "summary": "Get DispatchNote for Organization ID - Tested",
+        "description": "API to get the DispatchNote by Login OrganizationID",
+        "parameters": [
+          {
+            "name": "status",
+            "in": "path",
+            "type": "string",
+            "description": "Enter status Value- Created, Shipped, Accepted, Rejected",
+            "required": true
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "DispatchNote fetched successsfully",
+            "schema": {
+              "$ref": "#/definitions/getPurchaseOrderByIdResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/getAllDispatchNote": {
+      "get": {
+        "tags": [
+          "DN"
+        ],
+        "summary": "Get ALL Dispatch Note - Not tested",
+        "description": "API to get All Dispatch Note",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "All Dispatch Notes",
+            "schema": {
+              "$ref": "#/definitions/getAllDispatchNoteResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/errorPurchaseOrderResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/getInvoiceByPOID/{poID}": {
+      "get": {
+        "tags": [
+          "DN"
+        ],
+        "summary": "Get DispatchNote for Organization ID - Tested",
+        "description": "API to get the DispatchNote by Login OrganizationID",
+        "parameters": [
+          {
+            "name": "poID",
+            "in": "path",
+            "type": "string",
+            "description": "Enter poID system generated not PO number",
+            "required": true
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "DispatchNote fetched successsfully",
+            "schema": {
+              "$ref": "#/definitions/getPurchaseOrderByIdResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/upload": {
+      "post": {
+        "tags": [
+          "Upload"
+        ],
+        "summary": "uploada a document -  Should not be used- not tested",
+        "description": "API to to upload a document for PO or DN",
+        "parameters": [
+          {
+            "name": "documentName",
+            "in": "query",
+            "type": "string",
+            "description": "Enter documentName",
+            "required": true
+          },
+          {
+            "name": "Id",
+            "in": "query",
+            "type": "string",
+            "description": "Enter POId or DNId",
+            "required": true
+          },
+          {
+            "in": "formData",
+            "name": "certFile",
+            "type": "file",
+            "description": "The file to upload",
+            "required": true
+          }
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Dispatch Note fetched successsfully",
+            "schema": {
+              "$ref": "#/definitions/getDisptachNoteByIdResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/errorPurchaseOrderResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    },
+    "/api/download": {
+      "get": {
+        "tags": [
+          "Upload"
+        ],
+        "summary": "Download a document - Tested",
+        "description": "API to to download a document for PO or DN",
+        "parameters": [
+          {
+            "name": "hash",
+            "in": "query",
+            "type": "string",
+            "description": "Enter hash",
+            "required": true
+          }
+        ],
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Dispatch Note fetched successsfully",
+            "schema": {
+              "$ref": "#/definitions/getDisptachNoteByIdResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/errorPurchaseOrderResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthenticated access"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "api_key": []
+          }
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "accpetOrder": {
+      "type": "object",
+      "properties": {
+        "poID": {
+          "type": "string"
+        },
+        "comments": {
+          "type": "string"
+        }
+      }
+    },
+    "accept-rejectDN": {
+      "type": "object",
+      "properties": {
+        "invoiceID": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "integer"
+        },
+        "comments": {
+          "type": "string"
+        }
+      }
+    },
+    "ledgerChainInfoRes": {
+      "type": "object",
+      "properties": {
+        "height": {
+          "type": "integer"
+        },
+        "currentBlockHash": {
+          "type": "string"
+        },
+        "previousBlockHash": {
+          "type": "string"
+        }
+      }
+    },
+    "ledgerBlocksInfoRes": {
+      "type": "object",
+      "properties": {
+        "blocks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ledgerBlocksInfoRes1"
+          }
+        },
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ledgerBlocksInfoRes2"
+          }
+        }
+      }
+    },
+    "ledgerBlocksInfoRes1": {
+      "type": "object",
+      "properties": {
+        "blockNumber": {
+          "type": "string"
+        },
+        "prevBlockHash": {
+          "type": "string"
+        },
+        "currentBlockHash": {
+          "type": "string"
+        },
+        "txCount": {
+          "type": "integer"
+        }
+      }
+    },
+    "ledgerBlocksInfoRes2": {
+      "type": "object",
+      "properties": {
+        "txId": {
+          "type": "string"
+        },
+        "creater": {
+          "type": "string"
+        },
+        "channel": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "proposal_hash": {
+          "type": "string"
+        },
+        "chaincode_id": {
+          "type": "string"
+        },
+        "mspId": {
+          "type": "string"
+        },
+        "cert": {
+          "type": "string"
+        },
+        "blockNumber": {
+          "type": "string"
+        },
+        "payloads": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ledgerBlocksInfoPayloadsRes"
+          }
+        },
+        "endorsers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ledgerBlocksInfoEndorsersRes"
+          }
+        }
+      }
+    },
+    "ledgerBlocksInfoPayloadsRes": {
+      "type": "object",
+      "properties": {
+        "smartContract": {
+          "type": "string"
+        },
+        "stateData": {
+          "type": "string"
+        },
+        "reads": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ledgerBlocksInfoPayloadsRes1"
+          }
+        },
+        "writes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ledgerBlocksInfoPayloadsRes2"
+          }
+        }
+      }
+    },
+    "ledgerBlocksInfoPayloadsRes1": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "ledgerBlocksInfoPayloadsRes2": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "is_delete": {
+          "type": "boolean"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "ledgerBlocksInfoEndorsersRes": {
+      "type": "object",
+      "properties": {
+        "endorser": {
+          "type": "object",
+          "properties": {
+            "Mspid": {
+              "type": "string"
+            },
+            "IdBytes": {
+              "type": "string"
+            }
+          }
+        },
+        "signature": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "data": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ledgerTransactionByIdInfoRes": {
+      "type": "object",
+      "properties": {
+        "txId": {
+          "type": "string"
+        },
+        "creater": {
+          "type": "string"
+        },
+        "channel": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "proposal_hash": {
+          "type": "string"
+        },
+        "chaincode_id": {
+          "type": "string"
+        },
+        "payloads": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ledgerTransactionByIdInfoPayloadsRes"
+          }
+        },
+        "endorsers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ledgerBlocksInfoEndorsersRes"
+          }
+        }
+      }
+    },
+    "ledgerTransactionByIdInfoPayloadsRes": {
+      "type": "object",
+      "properties": {
+        "smartContract": {
+          "type": "string"
+        },
+        "reads": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ledgerTransactionByIdInfoPayloadsRes1"
+          }
+        },
+        "writes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ledgerBlocksInfoPayloadsRes2"
+          }
+        }
+      }
+    },
+    "ledgerTransactionByIdInfoPayloadsRes1": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "version": {
+          "type": "object",
+          "properties": {
+            "block_num": {
+              "type": "string"
+            },
+            "tx_num": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "ledgerBlockByTxHashInfoRes": {
+      "type": "object",
+      "properties": {
+        "blockNumber": {
+          "type": "string"
+        },
+        "previous_hash": {
+          "type": "string"
+        },
+        "data_hash": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "channel_id": {
+          "type": "string"
+        },
+        "txCount": {
+          "type": "string"
+        },
+        "blockHash": {
+          "type": "string"
+        },
+        "txIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "loginwithCredentails": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "sendEmailFromUI": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/sendEmailFromUIObj"
+      }
+    },
+    "sendEmailFromUIObj": {
+      "type": "object",
+      "properties": {
+        "to": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        }
+      }
+    },
+    "onboardOrganizations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/onboardOrganization"
+      }
+    },
+    "onboardOrganization": {
+      "type": "object",
+      "properties": {
+        "orgName": {
+          "type": "string"
+        },
+        "orgAdminFirstName": {
+          "type": "string"
+        },
+        "orgAdminLastName": {
+          "type": "string"
+        },
+        "orgAdminEmailId": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "countryOfInc": {
+          "type": "string"
+        },
+        "stateOfInc": {
+          "type": "string"
+        },
+        "zipCode": {
+          "type": "string"
+        },
+        "buisnessType": {
+          "type": "string"
+        },
+        "organizationType": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        }
+      }
+    },
+    "onboardOrganizationsResponse": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/onboardOrganizationResponse"
+      }
+    },
+    "onboardOrganizationResponse": {
+      "type": "object",
+      "properties": {
+        "seq": {
+          "type": "integer"
+        },
+        "status": {
+          "type": "object",
+          "properties": {
+            "success": {
+              "type": "boolean"
+            },
+            "txId": {
+              "type": "string"
+            },
+            "message": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "organizationsByPaginationResponse": {
+      "type": "object",
+      "properties": {
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/getOrganizationByIdResponse"
+          }
+        },
+        "bookmark": {
+          "type": "object",
+          "properties": {
+            "RecordsCount": {
+              "type": "number"
+            },
+            "Bookmark": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "createPurchaseOrder": {
+      "type": "object",
+      "properties": {
+        "destinationOrgId": {
+          "type": "string"
+        },
+        "destinationOrgName": {
+          "type": "string"
+        },
+        "PONumber": {
+          "type": "string"
+        },
+        "product": {
+          "type": "string"
+        },
+        "productDesc": {
+          "type": "string"
+        },
+        "specification": {
+          "type": "string"
+        },
+        "UOM": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "integer"
+        },
+        "rawmaterialSourcing": {
+          "type": "string"
+        },
+        "createdDate": {
+          "type": "string"
+        },
+        "expectedDate": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "CREATED",
+            "CLOSED",
+            "REJECTED"
+          ]
+        },
+        "comments": {
+          "type": "string"
+        },
+        "refPOID": {
+          "type": "string"
+        }
+      }
+    },
+    "updatePurchaseOrder": {
+      "type": "object",
+      "properties": {
+        "poID": {
+          "type": "string"
+        },
+        "comments": {
+          "type": "string"
+        }
+      }
+    },
+    "getPurchaseOrderByIdResponse": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "success"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string"
+            },
+            "record": {
+              "type": "object"
+            }
+          }
+        },
+        "message": {
+          "type": "string",
+          "example": null
+        }
+      }
+    },
+    "getAllPurchaseOrderResponse": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "success"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/getAllPO"
+          }
+        },
+        "message": {
+          "type": "string",
+          "example": null
+        }
+      }
+    },
+    "getAllPO": {
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "record": {
+          "type": "object"
+        }
+      }
+    },
+    "createProduct": {
+      "type": "object",
+      "properties": {
+        "productID": {
+          "type": "string"
+        },
+        "productDesc": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "integer"
+        }
+      }
+    },
+    "updateProduct": {
+      "type": "object",
+      "properties": {
+        "productID": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "integer"
+        }
+      }
+    },
+    "getProductByIdResponse": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "success"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string"
+            },
+            "record": {
+              "type": "object"
+            }
+          }
+        },
+        "message": {
+          "type": "string",
+          "example": null
+        }
+      }
+    },
+    "createDispatchNote": {
+      "type": "object",
+      "properties": {
+        "originationOrgId": {
+          "type": "string"
+        },
+        "originationOrgName": {
+          "type": "string"
+        },
+        "destinationOrgId": {
+          "type": "string"
+        },
+        "destinationOrgName": {
+          "type": "string"
+        },
+        "dnNumber": {
+          "type": "string"
+        },
+        "invoiceNumber": {
+          "type": "string"
+        },
+        "transportar": {
+          "type": "string"
+        },
+        "product": {
+          "type": "string"
+        },
+        "productDescr": {
+          "type": "string"
+        },
+        "productLabCertNumber": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "integer"
+        },
+        "heatNumber": {
+          "type": "string"
+        },
+        "UOM": {
+          "type": "string"
+        },
+        "rmCertNumber": {
+          "type": "string"
+        },
+        "orderCreatedDate": {
+          "type": "string"
+        },
+        "expectedDate": {
+          "type": "string"
+        },
+        "comments": {
+          "type": "string"
+        }
+      }
+    },
+    "updateDispatchNoteComment": {
+      "type": "object",
+      "properties": {
+        "invoiceID": {
+          "type": "string"
+        },
+        "comments": {
+          "type": "string"
+        }
+      }
+    },
+    "updateDispatchNote": {
+      "type": "object",
+      "properties": {
+        "originationOrgId": {
+          "type": "string"
+        },
+        "originationOrgName": {
+          "type": "string"
+        },
+        "destinationOrgId": {
+          "type": "string"
+        },
+        "destinationOrgName": {
+          "type": "string"
+        },
+        "dnNumber": {
+          "type": "string"
+        },
+        "invoiceNumber": {
+          "type": "string"
+        },
+        "transportar": {
+          "type": "string"
+        },
+        "product": {
+          "type": "string"
+        },
+        "productDescr": {
+          "type": "string"
+        },
+        "productLabCertNumber": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "integer"
+        },
+        "heatNumber": {
+          "type": "string"
+        },
+        "UOM": {
+          "type": "string"
+        },
+        "rmCertNumber": {
+          "type": "string"
+        },
+        "orderCreatedDate": {
+          "type": "string"
+        },
+        "expectedDate": {
+          "type": "string"
+        },
+        "comments": {
+          "type": "string"
+        }
+      }
+    },
+    "getDisptachNoteByIdResponse": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "success"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "DN": {
+              "type": "object",
+              "properties": {
+                "DNId": {
+                  "type": "string"
+                },
+                "originationOrgId": {
+                  "type": "string"
+                },
+                "originationOrgName": {
+                  "type": "string"
+                },
+                "destinationOrgId": {
+                  "type": "string"
+                },
+                "destinationOrgName": {
+                  "type": "string"
+                },
+                "dnNumber": {
+                  "type": "string"
+                },
+                "invoiceNumber": {
+                  "type": "string"
+                },
+                "transportar": {
+                  "type": "string"
+                },
+                "product": {
+                  "type": "string"
+                },
+                "productDescr": {
+                  "type": "string"
+                },
+                "productLabCertNumber": {
+                  "type": "string"
+                },
+                "quantity": {
+                  "type": "integer"
+                },
+                "heatNumber": {
+                  "type": "string"
+                },
+                "UOM": {
+                  "type": "string"
+                },
+                "rmCertNumber": {
+                  "type": "string"
+                },
+                "orderCreatedDate": {
+                  "type": "string"
+                },
+                "expectedDate": {
+                  "type": "string"
+                },
+                "status": {
+                  "enum": [
+                    "CREATED",
+                    "CLOSED",
+                    "REJECTED",
+                    "ACCEPTED"
+                  ]
+                },
+                "comments": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "message": {
+          "type": "string",
+          "example": null
+        }
+      }
+    },
+    "getAllDispatchNoteResponse": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "success"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/getAllDN"
+          }
+        },
+        "message": {
+          "type": "string",
+          "example": null
+        }
+      }
+    },
+    "getAllDN": {
+      "type": "object",
+      "properties": {
+        "DN": {
+          "type": "object",
+          "properties": {
+            "DNId": {
+              "type": "string"
+            },
+            "originationOrgId": {
+              "type": "string"
+            },
+            "originationOrgName": {
+              "type": "string"
+            },
+            "destinationOrgId": {
+              "type": "string"
+            },
+            "destinationOrgName": {
+              "type": "string"
+            },
+            "dnNumber": {
+              "type": "string"
+            },
+            "invoiceNumber": {
+              "type": "string"
+            },
+            "transportar": {
+              "type": "string"
+            },
+            "product": {
+              "type": "string"
+            },
+            "productDescr": {
+              "type": "string"
+            },
+            "productLabCertNumber": {
+              "type": "string"
+            },
+            "quantity": {
+              "type": "integer"
+            },
+            "heatNumber": {
+              "type": "string"
+            },
+            "UOM": {
+              "type": "string"
+            },
+            "rmCertNumber": {
+              "type": "string"
+            },
+            "orderCreatedDate": {
+              "type": "string"
+            },
+            "expectedDate": {
+              "type": "string"
+            },
+            "status": {
+              "enum": [
+                "CREATED",
+                "CLOSED",
+                "REJECTED",
+                "ACCEPTED"
+              ]
+            },
+            "comments": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "usersByPaginationResponse": {
+      "type": "object",
+      "properties": {
+        "records": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/getUserByIdResponse"
+          }
+        },
+        "bookmark": {
+          "type": "object",
+          "properties": {
+            "RecordsCount": {
+              "type": "number"
+            },
+            "Bookmark": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "getUserByIdResponse": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "integer"
+        },
+        "orgId": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 30
+        },
+        "organizationName": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "SUPERADMIN",
+            "ADMIN",
+            "MEMBER"
+          ]
+        },
+        "region": {
+          "type": "string"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "createdDate": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "getAllUsers": {
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "record": {
+          "type": "object"
+        }
+      }
+    },
+    "getUserByOrgIdResponse": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "integer"
+        },
+        "orgId": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 30
+        },
+        "organizationName": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "SUPERADMIN",
+            "ADMIN",
+            "MEMBER"
+          ]
+        },
+        "region": {
+          "type": "string"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "createdDate": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "getAllOrganizationResponse": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "success"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/getAllOrgnaization"
+          }
+        },
+        "message": {
+          "type": "string",
+          "example": null
+        }
+      }
+    },
+    "getAllOrgnaization": {
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "record": {
+          "type": "object"
+        }
+      }
+    },
+    "getAllUsersResponse": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "success"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/getAllUsers"
+          }
+        },
+        "message": {
+          "type": "string",
+          "example": null
+        }
+      }
+    },
+    "getOrganizationByIdResponse": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "success"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string"
+            },
+            "record": {
+              "type": "object"
+            }
+          }
+        },
+        "message": {
+          "type": "string",
+          "example": null
+        }
+      }
+    },
+    "CreateOrganizationResponse": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "success"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "orgId": {
+              "type": "string"
+            }
+          }
+        },
+        "message": {
+          "type": "string",
+          "example": null
+        }
+      }
+    },
+    "ErrorOrganizationResponse": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "error"
+        },
+        "data": {
+          "type": "string",
+          "example": null
+        },
+        "message": {
+          "type": "string",
+          "example": "Error Message Details"
+        }
+      }
+    },
+    "loginSuccessful": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "success"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "organizationName": {
+              "type": "string"
+            },
+            "userId": {
+              "type": "string"
+            },
+            "firstName": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            },
+            "emailId": {
+              "type": "string"
+            }
+          }
+        },
+        "message": {
+          "type": "string",
+          "example": null
+        }
+      }
+    },
+    "sucessPurchaseOrderResponse": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "Success"
+        },
+        "data": {
+          "type": "object"
+        },
+        "message": {
+          "type": "string",
+          "example": null
+        }
+      }
+    },
+    "errorPurchaseOrderResponse": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": false
+        },
+        "data": {
+          "type": "string",
+          "example": null
+        },
+        "message": {
+          "type": "string",
+          "example": "Error Message Details"
+        }
+      }
+    },
+    "sucessProductResponse": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "Success"
+        },
+        "data": {
+          "type": "object"
+        },
+        "message": {
+          "type": "string",
+          "example": null
+        }
+      }
+    },
+    "errorProductResponse": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": false
+        },
+        "data": {
+          "type": "string",
+          "example": null
+        },
+        "message": {
+          "type": "string",
+          "example": "Error Message Details"
+        }
+      }
+    },
+    "sucessProductStockResponse": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "Success"
+        },
+        "data": {
+          "type": "object"
+        },
+        "message": {
+          "type": "string",
+          "example": null
+        }
+      }
+    },
+    "errorProductStockResponse": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": false
+        },
+        "data": {
+          "type": "string",
+          "example": null
+        },
+        "message": {
+          "type": "string",
+          "example": "Error Message Details"
+        }
+      }
+    },
+    "getAllProductsResponse": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "success"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/getAllProducts"
+          }
+        },
+        "message": {
+          "type": "string",
+          "example": null
+        }
+      }
+    },
+    "getAllProducts": {
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "record": {
+          "type": "object"
+        }
+      }
+    },
+    "getProductByOrgIdResponse": {
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "record": {
+          "type": "object"
+        }
+      }
+    },
+    "sucessDisptachNoteResponse": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "Success"
+        },
+        "data": {
+          "type": "object"
+        },
+        "message": {
+          "type": "string",
+          "example": null
+        }
+      }
+    },
+    "onboardUsers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/onboardUser"
+      }
+    },
+    "onboardUser": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "string"
+        },
+        "orgId": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 30
+        },
+        "orgName": {
+          "type": "string"
+        },
+        "organizationType": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "SUPERADMIN",
+            "ADMIN",
+            "MEMBER"
+          ]
+        },
+        "region": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "orgId",
+        "orgName",
+        "email",
+        "phone",
+        "region",
+        "userId",
+        "userName",
+        "password",
+        "role"
+      ]
+    },
+    "changeUserPassword": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "oldPassword": {
+          "type": "string"
+        },
+        "newPassword": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "orgId": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 30
+        },
+        "orgName": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "SUPERADMIN",
+            "ADMIN",
+            "MEMBER"
+          ]
+        }
+      },
+      "required": [
+        "orgId",
+        "orgName",
+        "userId",
+        "userName",
+        "oldPassword",
+        "newPassword",
+        "role"
+      ]
+    },
+    "getUserRes": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "phone": {
+          "type": "integer"
+        },
+        "orgId": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 30
+        },
+        "organizationName": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "SUPERADMIN",
+            "ADMIN",
+            "MEMBER"
+          ]
+        },
+        "region": {
+          "type": "string"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "createdDateTime": {
+          "type": "string"
+        },
+        "modifiedBy": {
+          "type": "string"
+        },
+        "modifiedDateTime": {
+          "type": "string"
+        }
+      }
+    },
+    "authenticateRes": {
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "success"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "user": {
+              "type": "object",
+              "properties": {
+                "userId": {
+                  "type": "string"
+                },
+                "organizationName": {
+                  "type": "string"
+                },
+                "orgnizationType": {
+                  "type": "string"
+                },
+                "firstName": {
+                  "type": "string"
+                },
+                "lastName": {
+                  "type": "string"
+                },
+                "emailId": {
+                  "type": "string"
+                },
+                "role": {
+                  "type": "string",
+                  "enum": [
+                    "SUPERADMIN",
+                    "ADMIN",
+                    "MEMBER"
+                  ]
+                },
+                "createdBy": {
+                  "type": "string"
+                },
+                "createdDate": {
+                  "type": "string"
+                },
+                "modifiedBy": {
+                  "type": "string"
+                },
+                "modifiedDate": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "message": {
+          "type": "string",
+          "example": null
+        }
+      }
+    },
+    "queryUser": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "resetUserPassword": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "emailId": {
+          "type": "string"
+        }
+      }
+    },
+    "updateUserPassword": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "oldPassword": {
+          "type": "string"
+        }
+      }
+    },
+    "Response": {
+      "required": [
+        "success",
+        "message"
+      ],
+      "properties": {
+        "success": {
+          "type": "boolean",
+          "uniqueItems": true
+        },
+        "txId": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "Response1": {
+      "required": [
+        "success",
+        "message"
+      ],
+      "properties": {
+        "success": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "ResponseAuth": {
+      "required": [
+        "success",
+        "message",
+        "token"
+      ],
+      "properties": {
+        "success": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "message": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

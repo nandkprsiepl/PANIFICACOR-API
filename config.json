@@ -1,0 +1,60 @@
+{
+    "host":"localhost",
+    "port":"5000",
+    "jwt_expiretime":"36000",
+    "channelName":"mychannel",
+    "CC_SRC_PATH":"../artifacts",
+    "eventWaitTime":"30000",
+    "APP_SECRET":"smarbolt-secret",
+    "TOKEN_BEARER": "Bearer",
+    "MONGO_URL_SERVICE": "mongodb://admin:admin@smartbolt.eastus2.cloudapp.azure.com:30001/panificador?authSource=admin",
+    "OPTS": { "useNewUrlParser": true,"useUnifiedTopology": true },
+    "DBUSERNAME":"",
+    "DBPASSWORD":"",
+    "DBSERVER":"",
+    "DATABASE":"",
+    "EMAIL_SERVICE_NAME": "gmail",
+    "EMAIL_HOST_NAME": "smtpout.secureserver.net",
+    "EMAIL_USER": "murali.b",
+    "EMAIL_PASSWORD": "Esteem@123",
+    "LOGIN_URL":"http://20.51.241.42:5000/api-docs",
+    "ORG_DETAILS":{
+       "CHANNEL_NAME":"mychannel",
+       "ORG_NAME":"Operator",
+       "PEERS":["peer0.operator.example.com:7051"]
+    },
+    "admins":[
+      {
+        "username":"admin",
+        "secret":"adminpw",
+        "password":"adminpw"
+      }
+    ],
+    "env":"",
+    "TYPE_UTF":"utf8",
+    "AFFILIATION_DEPT": ".department1",
+    "Operator":{
+         "ORG_CONN": "blockchain/artifacts/network-config-org1.json",
+         "ORG_NAME":"Operator",
+         "ORG_CA":"ca.operator.example.com",
+         "ORG_MSP":"OperatorMSP",
+         "WALLET_TYPE":"Azure",
+         "APP_WALLETDB_URL": "",
+         "PEERS":[
+            {
+               "PEER":"peer0.operator.example.com:7051",
+               "PEER_NAME":"peer0.operator.example.com"
+            }
+         ],
+         "PEER0_WITHPORT": "peer0.operator.example.com:7051"
+    },
+    "INFURA_PROJECT_ID":"2TAMqccchcK384Th6nGpf4VAEiE",
+    "INFURA_PROJECT_SECRET":"0d7b3e394463a6b22ab9f0616b757f30",
+    "INFURA_PROJECT_HOST":"ipfs.infura.io",
+    "INFURA_PROJECT_PORT":5001,
+    "INFURA_PROJECT_PROTOCOL":"https"
+
+
+  } 
+   
+ 

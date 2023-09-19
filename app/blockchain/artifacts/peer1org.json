@@ -1,0 +1,48 @@
+{
+    "certificateAuthorities": {
+        "peer1orgCA": {
+            "caName": "ca.peer1org",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICcjCCAhigAwIBAgIUPex4buPuP+VLgShx4SuOjnQF+RwwCgYIKoZIzj0EAwIw\nXzELMAkGA1UEBhMCVVMxEzARBgNVBAgMCldhc2hpbmd0b24xETAPBgNVBAoMCHBl\nZXIxb3JnMREwDwYDVQQLDAhwZWVyMW9yZzEVMBMGA1UEAwwMcmNhLnBlZXIxb3Jn\nMB4XDTIxMDMxMDA4MjIxNVoXDTMxMDMwODA4MzIxNVowXzELMAkGA1UEBhMCVVMx\nEzARBgNVBAgMCldhc2hpbmd0b24xETAPBgNVBAoMCHBlZXIxb3JnMREwDwYDVQQL\nDAhwZWVyMW9yZzEVMBMGA1UEAwwMcmNhLnBlZXIxb3JnMFkwEwYHKoZIzj0CAQYI\nKoZIzj0DAQcDQgAEM2sX/7rBlUw3WhuaSV9C5YOrqnSIRT28c0xxVD43xEDnob60\nk+oraiXKZEsLLsm4eqveaqC9F1bNa7cjG1Gd+qOBsTCBrjAOBgNVHQ8BAf8EBAMC\nAaYwHQYDVR0lBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMCMA8GA1UdEwEB/wQFMAMB\nAf8wHQYDVR0OBBYEFHyy06Za268whYnwOh3L5aq9xAOIMB8GA1UdIwQYMBaAFHyy\n06Za268whYnwOh3L5aq9xAOIMCwGCWCGSAGG+EIBDQQfFh1PcGVuU1NMIEdlbmVy\nYXRlZCBDZXJ0aWZpY2F0ZTAKBggqhkjOPQQDAgNIADBFAiAOFMASt88fpC49me1L\nk4cA7jzWR95vzdRDECVEoYZS3gIhAPVOWr+eQ80fJFq4QcSAGLcfK4qLQNsubm9J\nbrXZWsis\n-----END CERTIFICATE-----\n"
+            },
+            "url": "https://ca.609e6be023934e89bb88.uksouth.aksapp.io:443"
+        }
+    },
+    "client": {
+        "connection": {
+            "timeout": {
+                "orderer": "300",
+                "peer": {
+                    "endorser": "300"
+                }
+            }
+        },
+        "organization": "peer1org"
+    },
+    "name": "peer1org",
+    "organizations": {
+        "peer1org": {
+            "certificateAuthorities": [
+                "peer1orgCA"
+            ],
+            "mspid": "peer1org",
+            "peers": [
+                "peer1.peer1org"
+            ]
+        }
+    },
+    "peers": {
+        "peer1.peer1org": {
+            "grpcOptions": {
+                "hostnameOverride": "peer1.609e6be023934e89bb88.uksouth.aksapp.io",
+                "ssl-target-name-override": "peer1.609e6be023934e89bb88.uksouth.aksapp.io"
+            },
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICcjCCAhigAwIBAgIUPex4buPuP+VLgShx4SuOjnQF+RwwCgYIKoZIzj0EAwIw\nXzELMAkGA1UEBhMCVVMxEzARBgNVBAgMCldhc2hpbmd0b24xETAPBgNVBAoMCHBl\nZXIxb3JnMREwDwYDVQQLDAhwZWVyMW9yZzEVMBMGA1UEAwwMcmNhLnBlZXIxb3Jn\nMB4XDTIxMDMxMDA4MjIxNVoXDTMxMDMwODA4MzIxNVowXzELMAkGA1UEBhMCVVMx\nEzARBgNVBAgMCldhc2hpbmd0b24xETAPBgNVBAoMCHBlZXIxb3JnMREwDwYDVQQL\nDAhwZWVyMW9yZzEVMBMGA1UEAwwMcmNhLnBlZXIxb3JnMFkwEwYHKoZIzj0CAQYI\nKoZIzj0DAQcDQgAEM2sX/7rBlUw3WhuaSV9C5YOrqnSIRT28c0xxVD43xEDnob60\nk+oraiXKZEsLLsm4eqveaqC9F1bNa7cjG1Gd+qOBsTCBrjAOBgNVHQ8BAf8EBAMC\nAaYwHQYDVR0lBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMCMA8GA1UdEwEB/wQFMAMB\nAf8wHQYDVR0OBBYEFHyy06Za268whYnwOh3L5aq9xAOIMB8GA1UdIwQYMBaAFHyy\n06Za268whYnwOh3L5aq9xAOIMCwGCWCGSAGG+EIBDQQfFh1PcGVuU1NMIEdlbmVy\nYXRlZCBDZXJ0aWZpY2F0ZTAKBggqhkjOPQQDAgNIADBFAiAOFMASt88fpC49me1L\nk4cA7jzWR95vzdRDECVEoYZS3gIhAPVOWr+eQ80fJFq4QcSAGLcfK4qLQNsubm9J\nbrXZWsis\n-----END CERTIFICATE-----\n"
+            },
+            "url": "grpcs://peer1.609e6be023934e89bb88.uksouth.aksapp.io:443"
+        }
+    },
+    "version": "1.0.0",
+    "wallet": "peer1org"
+}

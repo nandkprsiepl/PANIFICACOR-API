@@ -1,0 +1,4 @@
+{
+  "walletURL": "http://USER:PASSWORD@HOSTAPIDOMAIN:5983",
+  "basePath": "/home/smartbolt/smartbolt_API/app/blockchain/hyperleger-network"
+}
