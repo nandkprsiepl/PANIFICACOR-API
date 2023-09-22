@@ -28,7 +28,7 @@ const User = require('../schema/userSchema');
       //Fetch Admin Details
       let adminDetails = connectionUtil.getAdminDetails();
       //Enroll Admin user if not exist
-      await userRepo.enrollAdminIdentity(orgNameBlockhain);
+      //999await userRepo.enrollAdminIdentity(orgNameBlockhain);
 
       var pass = Math.random().toString(36).slice(-8)
       org.password = pass;
@@ -59,9 +59,11 @@ const User = require('../schema/userSchema');
 
       var orgOb = {orgId, orgName, orgAdminFirstName, orgAdminLastName, orgAdminEmailId, phone,address, countryOfInc, stateOfInc, zipCode, buisnessType, organizationType, status ,role }
       let args = [JSON.stringify(orgOb)]
+	    
+	    /*999
       logger.debug('org - ****** START %s', args);
-       result =await chaincodeRepo.invokeChaincode(peers,channelName,chaincodeName,constants.CREATE_ORG,args,adminDetails.username,orgNameBlockhain);
-      logger.debug('registerOrg - ****** result %s', JSON.stringify(result));
+       //999result =await chaincodeRepo.invokeChaincode(peers,channelName,chaincodeName,constants.CREATE_ORG,args,adminDetails.username,orgNameBlockhain);
+      //999logger.debug('registerOrg - ****** result %s', JSON.stringify(result));
       if(result.success){ 
         const userOb = {orgId, orgName, email, phone, status ,userId, userName, password, role, organizationType }
 
@@ -84,6 +86,7 @@ const User = require('../schema/userSchema');
         result = await helper.parseResponse(constants.FAILURE, result.message, "", 200);         
 
       }   
+	    999*/
       return result;
     } catch(err) {
       console.log("err",err)
