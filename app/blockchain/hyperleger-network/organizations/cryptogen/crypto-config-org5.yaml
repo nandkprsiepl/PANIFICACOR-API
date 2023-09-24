@@ -1,0 +1,16 @@
+#
+# Copyright MDX  All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+PeerOrgs:
+  - Name: BakerMSP
+    Domain: baker.example.com
+    EnableNodeOUs: true
+    Template:
+      Count: 2
+      SANS:
+        - localhost
+    Users:
+      Count: 1

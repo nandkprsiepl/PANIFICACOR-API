@@ -1,0 +1,58 @@
+{
+    "name": "test-network-operator",
+    "version": "1.0.0",
+    "client": {
+        "organization": "Operator",
+        "connection": {
+            "timeout": {
+                "peer": {
+                    "endorser": "300"
+                }
+            }
+        }
+    },
+    "channels": {
+        "mychannel": {
+          "peers": {
+            "peer0.operator.example.com": {
+              
+            }
+          }
+        }
+      },
+    "organizations": {
+        "Operator": {
+            "mspid": "OperatorMSP",
+            "peers": [
+                "peer0.operator.example.com"
+            ],
+            "certificateAuthorities": [
+                "ca.operator.example.com"
+            ]
+        }
+    },
+    "peers": {
+        "peer0.operator.example.com": {
+            "url": "grpcs://localhost:7051",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICZzCCAg2gAwIBAgIQOfoF+eBFaXVVDv2rdJpbsjAKBggqhkjOPQQDAjB+MQsw\nCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy\nYW5jaXNjbzEdMBsGA1UEChMUb3BlcmF0b3IuZXhhbXBsZS5jb20xIzAhBgNVBAMT\nGnRsc2NhLm9wZXJhdG9yLmV4YW1wbGUuY29tMB4XDTIxMDcyMDA5NDgwMFoXDTMx\nMDcxODA5NDgwMFowfjELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWEx\nFjAUBgNVBAcTDVNhbiBGcmFuY2lzY28xHTAbBgNVBAoTFG9wZXJhdG9yLmV4YW1w\nbGUuY29tMSMwIQYDVQQDExp0bHNjYS5vcGVyYXRvci5leGFtcGxlLmNvbTBZMBMG\nByqGSM49AgEGCCqGSM49AwEHA0IABEDiRoe9laNJ803m6XRmjbczL4Sh3gWhDGVR\nvlRYoqCjPNNu0xIKKXML04EOQ7cPHJd2dQJYm5az0VZm9WAG+8ejbTBrMA4GA1Ud\nDwEB/wQEAwIBpjAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwEwDwYDVR0T\nAQH/BAUwAwEB/zApBgNVHQ4EIgQg+ClqYvzaein6OhVGNqefG4kHe4pGB4xRgWll\n3Na/uj8wCgYIKoZIzj0EAwIDSAAwRQIhAOC15bb7jEDuhzdNVli6aM2vuw17PhC0\nvebvXj1pvV+3AiAw8kq1QTt+z8cPDHd1PiIHROInRlzeLVETfZ+uH51yYg==\n-----END CERTIFICATE-----\n"
+            },
+            "grpcOptions": {
+                "ssl-target-name-override": "peer0.operator.example.com",
+                "hostnameOverride": "peer0.operator.example.com"
+            }
+        }
+    },
+    "certificateAuthorities": {
+        "ca.operator.example.com": {
+            "url": "https://localhost:7054",
+            "caName": "ca-operator",
+            "tlsCACerts": {
+                "path": "/home/smartbolt/smartbolt_API/app/blockchain/hyperleger-network/organizations/peerOrganizations/operator.example.com/ca/ca.operator.example.com-cert.pem"
+            },
+            "httpOptions": {
+                "verify": false
+            }
+        }
+    }
+}
