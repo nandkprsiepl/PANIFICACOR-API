@@ -1,25 +1,24 @@
 version: '3.2'
- 
 services:
-    offchain-mongodb:
-        image: mongo:4.1.8-xenial
-        container_name: "offchain-mongodb"
-        env_file:
+  mongo:
+    image: mongo:5.0
+    container_name: mongo
+    env_file:
             mongodb.env
-        volumes:
-            - ./data/db:/data/db
-            - ./data/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
-        ports:
-            - "30001:27017"
-        command:
-            - '--auth'
- 
-    ofchain-mongo-express:
-        image: mongo-express
-        container_name: "ofchain-Mongo-Express"
-        env_file:
-            mongo-express.env
-        ports:
-            - "7101:8081"
-        links:
-            - offchain-mongodb:mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data/db:/data/db
+      - ./data/dev.archive:/Databases/dev.archive
+      - ./data/production:/Databases/production
+  mongo-express:
+    image: mongo-express
+    container_name: mexpress
+    env_file:
+        mongo-express.env
+    links:
+      - mongo
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
