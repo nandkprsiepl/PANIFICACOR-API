@@ -90,6 +90,5 @@ app.use('/', notificationRoutes);
 app.use('/', txInfoRoutes);
 // make '/app' default route
 app.get('/', function (req, res) {
-     console.log('rrrrrrrrrrrrrrrrrrr')
     return res.redirect('/api-docs');
 });
