@@ -17,7 +17,6 @@ const config = require('../../config.json');
  * @param {*} orgName
  */
 async function enrollAdminIdentity(orgName) {
-  let gateway = null;
   const response = null;
   let adminUser = null;
   let status = false;
@@ -29,23 +28,16 @@ async function enrollAdminIdentity(orgName) {
       adminUser = connectionUtil.getAdminDetails();
     }    
 
-    gateway = await chaincodeUtil.connectGateway(adminUser.username, orgName);
-        logger.info('Gateway details: ', gateway);
-    
-    // Check If Admin User Exist return else create Admin User
-    if (gateway) {
+   // Check If Admin User Exist return else create Admin User
       const wallet = await connectionUtil.getWallet(orgName);
       const adminExists = await wallet.get(adminUser.username);
-        if (adminExists) {
-          logger.info('An identity for the admin user ' + adminUser.username + ' exists in the wallet');
-          status = true;
-          return status;
-        } 
-    }
-
+      if (adminExists) {
+        logger.info('An identity for the admin user ' + adminUser.username + ' exists in the wallet');
+        status = true;
+        return status;
+      } 
+  
     const ca = connectionUtil.getCAService(orgName);
-    const wallet = await connectionUtil.getWallet(orgName);
-    logger.info('AdminUser details',  adminUser);
 
     if(config.env == "Azure"){   
       const certBase64 = new Buffer(adminUser.cert, 'base64');
@@ -73,9 +65,7 @@ async function enrollAdminIdentity(orgName) {
     logger.info('Successfully enrolled admin user "' + adminUser.username + '" and imported it into the wallet');
   } catch (error) {
     logger.error(response.message);
-  } finally {
-    chaincodeUtil.closeGateway(gateway);
-  }
+  } 
   return status;
 }
 
