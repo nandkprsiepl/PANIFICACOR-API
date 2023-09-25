@@ -167,6 +167,7 @@ async function registerUser(user) {
       message: user.username + ' enrolled Successfully'
     };
   } catch (error) {
+    console.log("error",error);
     response = {
       message: `Failed to register user "${user.username}": ${error}`,
       success: false
