@@ -232,9 +232,9 @@ const queryAllUsers = async function (req) {
 };
 
 
-const checkUserExists = async function (orgName, orgId, userId) {
+const checkUserExists = async function (orgType, orgName, userId) {
   let result = {}
-  const wallet = await connectionUtil.getWallet(orgName,orgId);
+  const wallet = await connectionUtil.getWallet(orgType,orgName);
   const userExists = await wallet.get(userId);
   if (userExists) {
     result.success = false
