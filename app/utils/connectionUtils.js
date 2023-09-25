@@ -81,12 +81,12 @@ async function getWallet(orgName,orgId){
   let wallet=null;
   try{
     //logger.info('Org name:', orgName);
-    const orgDetails = config[orgName];
+    let orgDetails = config[orgName];
     if(orgDetails.WALLET_TYPE === "CouchDb"){
       wallet = new CouchDBWallet({url:orgDetails.APP_WALLETDB_URL});
       //logger.info('Wallet DB URL', orgDetails.APP_WALLETDB_URL);     
     }else{
-      const walletPath = path.join(process.cwd()  , 'wallet' , orgName);
+      let walletPath = path.join(process.cwd()  , 'wallet' , orgName);
       if(orgId){
         walletPath = path.join(walletPath  ,  orgId);
       }
