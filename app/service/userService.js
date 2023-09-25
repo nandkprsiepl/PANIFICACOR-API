@@ -69,7 +69,7 @@ const registerUser = async function (user) {
       let org = user.orgName
       let roleactual = user.role
       user.role = 'admin'
-      user.orgName = orgNameBlockchain;
+      //user.orgName = orgNameBlockchain;
       enrollResult = await userRepo.registerUser(user);
       registerUserResult.enrollUserResult = enrollResult;
       logger.debug('registerUser - ****** enrollResult %s', enrollResult);
@@ -232,9 +232,9 @@ const queryAllUsers = async function (req) {
 };
 
 
-const checkUserExists = async function (orgName, userId) {
+const checkUserExists = async function (orgName, orgId, userId) {
   let result = {}
-  const wallet = await connectionUtil.getWallet(orgName);
+  const wallet = await connectionUtil.getWallet(orgName,orgId);
   const userExists = await wallet.get(userId);
   if (userExists) {
     result.success = false

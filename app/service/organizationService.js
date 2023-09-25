@@ -36,15 +36,16 @@ const User = require('../schema/userSchema');
      //Generate OrgID 
       let id = await genId()
       console.log("id org",id);
-      org.orgId = "ORG" + id;
+      org.orgId = org.organizationId;//"ORG" + id;
       org.userId = org.orgAdminEmailId 
       org.userName = org.orgAdminFirstName + " " + org.orgAdminLastName;
       org.email= org.orgAdminEmailId;  
+      org.orgName = org.organizationType;
       var {orgId, orgName, orgAdminFirstName, orgAdminLastName, orgAdminEmailId, phone, address, countryOfInc, stateOfInc, zipCode, buisnessType, organizationType, status ,userId, userName, password, role, email} = org
       if(!status){ status = constants.STATUS_ACTIVE;}
 
       //Check If User exist
-      let userExist = await userService.checkUserExists(orgNameBlockhain,userId)
+      let userExist = await userService.checkUserExists(org.organizationType,org.organizationId,userId)
       if(!userExist.success){
         result.success = false;
         result.message = "User Already exist";
@@ -60,7 +61,7 @@ const User = require('../schema/userSchema');
       var orgOb = {orgId, orgName, orgAdminFirstName, orgAdminLastName, orgAdminEmailId, phone,address, countryOfInc, stateOfInc, zipCode, buisnessType, organizationType, status ,role }
       let args = [JSON.stringify(orgOb)]
       logger.debug('org - ****** START %s', args);
-       result =await chaincodeRepo.invokeChaincode(peers,channelName,chaincodeName,constants.CREATE_ORG,args,adminDetails.username,orgNameBlockhain);
+       result =await chaincodeRepo.invokeChaincode(peers,channelName,chaincodeName,constants.CREATE_ORG,args,adminDetails.username,org.orgName);
       logger.debug('registerOrg - ****** result %s', JSON.stringify(result));
       if(result.success){ 
         const userOb = {orgId, orgName, email, phone, status ,userId, userName, password, role, organizationType }
