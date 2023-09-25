@@ -26,7 +26,7 @@ const User = require('../schema/userSchema');
       logger.debug('onboardOrganization - ****** START ');
       let userExist = await userService.checkUserExists(org.orgType,org.orgName,org.emailId)
       if(!userExist.success){
-        return userExist;
+        return helper.parseResponse(constants.FAILURE, userExist.message, "", 400);         
       }
 
      //Generate OrgID 
