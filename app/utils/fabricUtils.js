@@ -30,7 +30,7 @@ async function connectGateway(userId, orgName, orgId) {
     console.log("connDetails-->>",connDetails)
     // Create a new gateway for connecting to our peer node.
     const gateway = new Gateway();
-    await gateway.connect(connDetails, { wallet, identity: userId, discovery: { enabled: true, asLocalhost: false } });
+    await gateway.connect(connDetails, { wallet, identity: userId, discovery: { enabled: true, asLocalhost: true } });
 
     logger.info('Gateway Connected');
 
