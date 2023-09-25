@@ -84,7 +84,7 @@ const registerUser = async function (user) {
         //Onchain Registration Blockchain
         let args = [JSON.stringify(user)]
         logger.debug('user - ****** START %s', args);
-        let resultOnChain = await chaincodeRepo.invokeChaincode(peers, channelName, chaincodeName, constants.CREATE_USER, args, adminDetails.username, orgType);
+        let resultOnChain = await chaincodeRepo.invokeChaincode(peers, channelName, chaincodeName, constants.CREATE_USER, args, userId, orgType);
         logger.debug('registerUser - ****** result %s', resultOnChain);
         registerUserResult.onChainReg = resultOnChain;
       }
