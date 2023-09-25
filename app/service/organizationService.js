@@ -27,7 +27,7 @@ const User = require('../schema/userSchema');
       let userExist = await userService.checkUserExists(org.orgType,org.orgName,org.emailId)
       console.log("userExist",userExist)
       if(!userExist.success){
-        return helper.parseResponse(constants.FAILURE, userExist.message, "", 400);         
+        return userExist
       }
 
      //Generate OrgID 

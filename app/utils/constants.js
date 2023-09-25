@@ -93,6 +93,6 @@ module.exports = {
   PASSWORD_RESET_TEXT : "Your password is reset to ",
   PASSWORD_CHANGE_SUBJECT: "Password change notification from Smartbolt Solution",
   PASSWORD_CHANGE_TEXT: "Your password is changed. Please contact administrator if you didn't change it.",
-  ALREADY_EXISTS : "Already Exist"
+  ALREADY_EXISTS : "Already Exist "
 
 };
