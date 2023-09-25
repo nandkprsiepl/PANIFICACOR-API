@@ -3,9 +3,6 @@
     "version": "1.0.0",
     "channels":{
         "bcmchannel":{
-            "orderers":[
-                "orderer.example.com"
-            ],
             "peers":{
                 "peer0.broker.example.com":{
                     "endorsingPeer": true,
@@ -46,18 +43,6 @@
             "grpcOptions": {
                 "ssl-target-name-override": "peer0.broker.example.com",
                 "hostnameOverride": "peer0.broker.example.com"
-            }
-        }
-    },
-    "orderers":{
-        "orderer.example.com":{
-            "url": "grpcs://20.51.241.42:7050",
-            "tlsCACerts": {
-                "pem": "-----BEGIN CERTIFICATE-----\nMIICQzCCAemgAwIBAgIQSg1uMDb1fLDubvRZHKkZ/jAKBggqhkjOPQQDAjBsMQsw\nCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy\nYW5jaXNjbzEUMBIGA1UEChMLZXhhbXBsZS5jb20xGjAYBgNVBAMTEXRsc2NhLmV4\nYW1wbGUuY29tMB4XDTIzMDkxOTE3NDQwMFoXDTMzMDkxNjE3NDQwMFowbDELMAkG\nA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBGcmFu\nY2lzY28xFDASBgNVBAoTC2V4YW1wbGUuY29tMRowGAYDVQQDExF0bHNjYS5leGFt\ncGxlLmNvbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABD56WmVRhenZegjQ/A7T\nnOqNApvKUI2CtgYObz/9YSYAjYp1OHccGfJtyMRTjchBHJlxQLLatYj0nlMEPKQH\n4jGjbTBrMA4GA1UdDwEB/wQEAwIBpjAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYB\nBQUHAwEwDwYDVR0TAQH/BAUwAwEB/zApBgNVHQ4EIgQgQh+tX+iSfapSMTwf06Wq\nvn1bdnYgrklvcAEZ+oLFfN8wCgYIKoZIzj0EAwIDSAAwRQIgCNxxaSBN8AH7nfri\nHtPw0Ig19YaPFc+qp4fQtk4uAVcCIQC4OjMuvfzE9pThwEaoAAcfG0HHFLaREbrY\n9qmM+AW/MA==\n-----END CERTIFICATE-----\n"
-            },
-            "grpcOptions": {
-                "ssl-target-name-override": "orderer.example.com",
-                "hostnameOverride": "20.51.241.42"
             }
         }
     },
