@@ -1,0 +1,61 @@
+{
+    "name": "test-network-Baker",
+    "version": "1.0.0",
+    "channels":{
+        "bcmchannel":{
+            "peers":{
+                "peer0.baker.example.com":{
+                    "endorsingPeer": true,
+                    "chaincodeQuery": true,
+                    "ledgerQuery": true,
+                    "eventSource": true
+                }
+            }
+        }
+    },    
+    "client": {
+        "organization": "Baker",
+        "connection": {
+            "timeout": {
+                "peer": {
+                    "endorser": "300"
+                }
+            }
+        }
+    },
+    "organizations": {
+        "Baker": {
+            "mspid": "BakerMSP",
+            "peers": [
+                "peer0.baker.example.com"
+            ],
+            "certificateAuthorities": [
+                "ca.baker.example.com"
+            ]
+        }
+    },
+    "peers": {
+        "peer0.baker.example.com": {
+            "url": "grpcs://localhost:15051",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICXDCCAgGgAwIBAgIQQisQiqkoegoHT0CX8T2x/DAKBggqhkjOPQQDAjB4MQsw\nCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy\nYW5jaXNjbzEaMBgGA1UEChMRYmFrZXIuZXhhbXBsZS5jb20xIDAeBgNVBAMTF3Rs\nc2NhLmJha2VyLmV4YW1wbGUuY29tMB4XDTIzMDkxOTE3NDQwMFoXDTMzMDkxNjE3\nNDQwMFoweDELMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNV\nBAcTDVNhbiBGcmFuY2lzY28xGjAYBgNVBAoTEWJha2VyLmV4YW1wbGUuY29tMSAw\nHgYDVQQDExd0bHNjYS5iYWtlci5leGFtcGxlLmNvbTBZMBMGByqGSM49AgEGCCqG\nSM49AwEHA0IABDPoP6nZp8EDlRj02eTjLlfl0qMhLZ791w+mDA1CpLqLgl+BnVf9\n6wNGavlwpasRVke1YsFQwAW4vgXl08y4WYejbTBrMA4GA1UdDwEB/wQEAwIBpjAd\nBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwEwDwYDVR0TAQH/BAUwAwEB/zAp\nBgNVHQ4EIgQgZ3zs/WOE9ptwWhuYieDvbVy7bZLf7/9OAtXvA9b/CAYwCgYIKoZI\nzj0EAwIDSQAwRgIhAOfE193eGSGA01vXV+7GdB51hRJJ4GynxKYBX1CAbhsgAiEA\nkmro12zOa5WVvYd8okuug2/2qD6WiAPRmsLhiG3TGec=\n-----END CERTIFICATE-----\n"
+            },
+            "grpcOptions": {
+                "ssl-target-name-override": "peer0.baker.example.com",
+                "hostnameOverride": "peer0.baker.example.com"
+            }
+        }
+    },
+    "certificateAuthorities": {
+        "ca.baker.example.com": {
+            "url": "https://localhost:11054",
+            "caName": "ca-baker",
+            "tlsCACerts": {
+                "pem": ["-----BEGIN CERTIFICATE-----\nMIICVzCCAfygAwIBAgIRAL1klEjhfoPz2C/dj38Ls5IwCgYIKoZIzj0EAwIwdTEL\nMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG\ncmFuY2lzY28xGjAYBgNVBAoTEWJha2VyLmV4YW1wbGUuY29tMR0wGwYDVQQDExRj\nYS5iYWtlci5leGFtcGxlLmNvbTAeFw0yMzA5MTkxNzQ0MDBaFw0zMzA5MTYxNzQ0\nMDBaMHUxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9ybmlhMRYwFAYDVQQH\nEw1TYW4gRnJhbmNpc2NvMRowGAYDVQQKExFiYWtlci5leGFtcGxlLmNvbTEdMBsG\nA1UEAxMUY2EuYmFrZXIuZXhhbXBsZS5jb20wWTATBgcqhkjOPQIBBggqhkjOPQMB\nBwNCAAQ5o5dPnxDNrJJko0vgwbVnSUPtN5YamSy/No6XRliqfk4tILGqw6V38FTV\nR0F3ZVKMEf4uNQJRlKVqcMuYsLUpo20wazAOBgNVHQ8BAf8EBAMCAaYwHQYDVR0l\nBBYwFAYIKwYBBQUHAwIGCCsGAQUFBwMBMA8GA1UdEwEB/wQFMAMBAf8wKQYDVR0O\nBCIEIOnZxGmhVJGgdG6b3rH4eUGns20IM4KHKfep8cNzw5VdMAoGCCqGSM49BAMC\nA0kAMEYCIQCW31m+Im3jQkSDoGygzl6BmT/xxRKLvpNIn+Q7/RjCKQIhAKcpZV0j\nKlD9DFIKVYKScUja8wnimEAWPZVdyIpzMrEQ\n-----END CERTIFICATE-----\n"]
+            },
+            "httpOptions": {
+                "verify": false
+            }
+        }
+    }
+}

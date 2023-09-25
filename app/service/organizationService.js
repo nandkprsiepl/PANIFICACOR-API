@@ -26,9 +26,9 @@ const User = require('../schema/userSchema');
       logger.debug('onboardOrganization - ****** START ');
       let result = {};
       //Fetch Admin Details
-      let adminDetails = connectionUtil.getAdminDetails();
+      let adminDetails = connectionUtil.getAdminDetailsForOrg(org.organizationType);
       //Enroll Admin user if not exist
-      await userRepo.enrollAdminIdentity(orgNameBlockhain);
+      await userRepo.enrollAdminIdentity(org.organizationType);
 
       var pass = Math.random().toString(36).slice(-8)
       org.password = pass;

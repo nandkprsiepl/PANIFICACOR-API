@@ -23,7 +23,7 @@ async function enrollAdminIdentity(orgName) {
   let status = false;
   try {
     const orgDetails = config[orgName];
-    if(config.env == "Azure"){
+    if(config.env != "Azure"){
       adminUser = connectionUtil.getAdminDetailsForOrg(orgName);
     }else{
       adminUser = connectionUtil.getAdminDetails();

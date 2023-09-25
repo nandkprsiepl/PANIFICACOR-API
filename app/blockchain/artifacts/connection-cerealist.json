@@ -1,0 +1,61 @@
+{
+    "name": "test-network-Cerealist",
+    "version": "1.0.0",
+    "channels":{
+        "bcmchannel":{
+            "peers":{
+                "peer0.cerealist.example.com":{
+                    "endorsingPeer": true,
+                    "chaincodeQuery": true,
+                    "ledgerQuery": true,
+                    "eventSource": true
+                }
+            }
+        }
+    },    
+    "client": {
+        "organization": "Cerealist",
+        "connection": {
+            "timeout": {
+                "peer": {
+                    "endorser": "300"
+                }
+            }
+        }
+    },
+    "organizations": {
+        "Cerealist": {
+            "mspid": "CerealistMSP",
+            "peers": [
+                "peer0.cerealist.example.com"
+            ],
+            "certificateAuthorities": [
+                "ca.cerealist.example.com"
+            ]
+        }
+    },
+    "peers": {
+        "peer0.cerealist.example.com": {
+            "url": "grpcs://localhost:11051",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICbTCCAhOgAwIBAgIQa14RWnHoJwaiwmqb/VRa/zAKBggqhkjOPQQDAjCBgDEL\nMAkGA1UEBhMCVVMxEzARBgNVBAgTCkNhbGlmb3JuaWExFjAUBgNVBAcTDVNhbiBG\ncmFuY2lzY28xHjAcBgNVBAoTFWNlcmVhbGlzdC5leGFtcGxlLmNvbTEkMCIGA1UE\nAxMbdGxzY2EuY2VyZWFsaXN0LmV4YW1wbGUuY29tMB4XDTIzMDkxOTE3NDQwMFoX\nDTMzMDkxNjE3NDQwMFowgYAxCzAJBgNVBAYTAlVTMRMwEQYDVQQIEwpDYWxpZm9y\nbmlhMRYwFAYDVQQHEw1TYW4gRnJhbmNpc2NvMR4wHAYDVQQKExVjZXJlYWxpc3Qu\nZXhhbXBsZS5jb20xJDAiBgNVBAMTG3Rsc2NhLmNlcmVhbGlzdC5leGFtcGxlLmNv\nbTBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABAsiRTgsvM74i7AnJlVXRncXFVqb\nDTuw6CCS9SJnwn+j4wwa08749i2sq7o/Y+qU/cJcF1UjSE8Oonpir4RrDaqjbTBr\nMA4GA1UdDwEB/wQEAwIBpjAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwEw\nDwYDVR0TAQH/BAUwAwEB/zApBgNVHQ4EIgQg7EzrRRDQ6LTKr6aOwsU4vCLNbSqu\nRKm1VF+dSt+8CgQwCgYIKoZIzj0EAwIDSAAwRQIgWILpixhEpmWit8WgHGuQa9pF\nCJoo9lAWhX8d2SRXIEsCIQDfFwHi8YuMId9HRY2yAPRIa19yfEcTrsMxSZs6QCqP\nig==\n-----END CERTIFICATE-----\n"
+            },
+            "grpcOptions": {
+                "ssl-target-name-override": "peer0.cerealist.example.com",
+                "hostnameOverride": "peer0.cerealist.example.com"
+            }
+        }
+    },
+    "certificateAuthorities": {
+        "ca.cerealist.example.com": {
+            "url": "https://localhost:12054",
+            "caName": "ca-cerealist",
+            "tlsCACerts": {
+                "pem": ["-----BEGIN CERTIFICATE-----\nMIICZjCCAgugAwIBAgIQR8yaSWkZHhVQroSTK5XuMjAKBggqhkjOPQQDAjB9MQsw\nCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy\nYW5jaXNjbzEeMBwGA1UEChMVY2VyZWFsaXN0LmV4YW1wbGUuY29tMSEwHwYDVQQD\nExhjYS5jZXJlYWxpc3QuZXhhbXBsZS5jb20wHhcNMjMwOTE5MTc0NDAwWhcNMzMw\nOTE2MTc0NDAwWjB9MQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEW\nMBQGA1UEBxMNU2FuIEZyYW5jaXNjbzEeMBwGA1UEChMVY2VyZWFsaXN0LmV4YW1w\nbGUuY29tMSEwHwYDVQQDExhjYS5jZXJlYWxpc3QuZXhhbXBsZS5jb20wWTATBgcq\nhkjOPQIBBggqhkjOPQMBBwNCAAQRoJz3e9kaePHRAJvazV5eZOEvPrjXqqIWqDai\nrtCLeatBeRFqEpGRA1b0LgcsNINV2M52o2vXowaSGEjOVkWgo20wazAOBgNVHQ8B\nAf8EBAMCAaYwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUFBwMBMA8GA1UdEwEB\n/wQFMAMBAf8wKQYDVR0OBCIEIOpQVgSs67MB/xPiP8Hhj86E6YWYdy6nEF8djPGZ\nv8VuMAoGCCqGSM49BAMCA0kAMEYCIQDZ9HE7BFBgWwajlbLsShU1a+3NqZoVmNKI\nvi8ZlmbLpgIhALcwSkd+88yExoQELglAwKa7LuNmcbc4sBUiECDIL5+u\n-----END CERTIFICATE-----\n"]
+            },
+            "httpOptions": {
+                "verify": false
+            }
+        }
+    }
+}

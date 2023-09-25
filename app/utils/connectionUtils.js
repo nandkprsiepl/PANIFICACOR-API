@@ -18,7 +18,7 @@ function getAdminDetails() {
 }
 
 function getAdminDetailsForOrg(orgName) {
-    return config[orgName].admins;
+    return config[orgName].admins[0];
 }
 
 function getConnectionPath(orgName){
@@ -77,7 +77,7 @@ function getCAService(orgName){
  * Method to load the organization specific wallet
  * @param {*} orgName 
  */
-async function getWallet(orgName){
+async function getWallet(orgName,orgId){
   let wallet=null;
   try{
     //logger.info('Org name:', orgName);
@@ -86,11 +86,12 @@ async function getWallet(orgName){
       wallet = new CouchDBWallet({url:orgDetails.APP_WALLETDB_URL});
       //logger.info('Wallet DB URL', orgDetails.APP_WALLETDB_URL);     
     }else{
-      const walletPath = path.join(process.cwd()  , 'wallet');
-      //logger.info('walletPath:', walletPath);
-      //wallet = new FileSystemWallet(walletPath);
+      const walletPath = path.join(process.cwd()  , 'wallet' , orgName);
+      if(orgId){
+        walletPath = path.join(walletPath  ,  orgId);
+      }
+      logger.info('walletPath:', walletPath);
        wallet = await Wallets.newFileSystemWallet(walletPath);
-
     }
     // Connecting to DB Wallet store
   } catch (error) {

@@ -9,7 +9,7 @@
       "url": "https://www.firstgen.io"
     }
   },
-  "host": "http://localhost:5000",
+  "host": "localhost:5000",
   "basePath": "/",
   "tags": [
     {

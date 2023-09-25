@@ -12,9 +12,9 @@ const config = require('../../config.json');
  * @param {*} userId 
  * @param {*} orgName 
  */
-async function connectGateway(userId, orgName) {
+async function connectGateway(userId, orgName, orgId) {
   try {
-    const wallet = await connectionUtil.getWallet(orgName);
+    const wallet = await connectionUtil.getWallet(orgName,orgId);
     logger.info('wallet:', wallet);
     logger.info('userId:', userId);
 
@@ -30,7 +30,7 @@ async function connectGateway(userId, orgName) {
     console.log("connDetails-->>",connDetails)
     // Create a new gateway for connecting to our peer node.
     const gateway = new Gateway();
-    await gateway.connect(connDetails, { wallet, identity: userId, discovery: { enabled: true, asLocalhost: true } });
+    await gateway.connect(connDetails, { wallet, identity: userId, discovery: { enabled: true, asLocalhost: false } });
 
     logger.info('Gateway Connected');
 

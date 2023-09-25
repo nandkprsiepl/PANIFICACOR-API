@@ -1,0 +1,61 @@
+{
+    "name": "test-network-Farmer",
+    "version": "1.0.0",
+    "channels":{
+        "bcmchannel":{
+            "peers":{
+                "peer0.farmer.example.com":{
+                    "endorsingPeer": true,
+                    "chaincodeQuery": true,
+                    "ledgerQuery": true,
+                    "eventSource": true
+                }
+            }
+        }
+    },    
+    "client": {
+        "organization": "Farmer",
+        "connection": {
+            "timeout": {
+                "peer": {
+                    "endorser": "300"
+                }
+            }
+        }
+    },
+    "organizations": {
+        "Farmer": {
+            "mspid": "FarmerMSP",
+            "peers": [
+                "peer0.farmer.example.com"
+            ],
+            "certificateAuthorities": [
+                "ca.farmer.example.com"
+            ]
+        }
+    },
+    "peers": {
+        "peer0.farmer.example.com": {
+            "url": "grpcs://localhost:9051",
+            "tlsCACerts": {
+                "pem": "-----BEGIN CERTIFICATE-----\nMIICXzCCAgWgAwIBAgIQKccq6yjxv2FFK+3FFK9GdjAKBggqhkjOPQQDAjB6MQsw\nCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy\nYW5jaXNjbzEbMBkGA1UEChMSZmFybWVyLmV4YW1wbGUuY29tMSEwHwYDVQQDExh0\nbHNjYS5mYXJtZXIuZXhhbXBsZS5jb20wHhcNMjMwOTE5MTc0NDAwWhcNMzMwOTE2\nMTc0NDAwWjB6MQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQG\nA1UEBxMNU2FuIEZyYW5jaXNjbzEbMBkGA1UEChMSZmFybWVyLmV4YW1wbGUuY29t\nMSEwHwYDVQQDExh0bHNjYS5mYXJtZXIuZXhhbXBsZS5jb20wWTATBgcqhkjOPQIB\nBggqhkjOPQMBBwNCAARBt0TrUFGhTLvXtvWmXK4V1A738ztJf8WT6sSpkRfe/AOg\nZE7yvnTy0WxlLDms7HbT4kc0K5zP0G88PCSt6eQ3o20wazAOBgNVHQ8BAf8EBAMC\nAaYwHQYDVR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUFBwMBMA8GA1UdEwEB/wQFMAMB\nAf8wKQYDVR0OBCIEIJvipekSU80Y2iA2ZAFf41cNe49IqjT7ngnEcljfH2XZMAoG\nCCqGSM49BAMCA0gAMEUCIE9Ez68GRILcRMNhXX27oHFmWKzOD4WkQUGfUUr9S7xV\nAiEAjS/8czShysW5bqDGwtn8G3oiPe/FRBERKv27BSQOec4=\n-----END CERTIFICATE-----\n"
+            },
+            "grpcOptions": {
+                "ssl-target-name-override": "peer0.farmer.example.com",
+                "hostnameOverride": "peer0.farmer.example.com"
+            }
+        }
+    },
+    "certificateAuthorities": {
+        "ca.farmer.example.com": {
+            "url": "https://localhost:8054",
+            "caName": "ca-farmer",
+            "tlsCACerts": {
+                "pem": ["-----BEGIN CERTIFICATE-----\nMIICWjCCAf+gAwIBAgIQFaNEwqJ/yUm8BB+Hs8/FlTAKBggqhkjOPQQDAjB3MQsw\nCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UEBxMNU2FuIEZy\nYW5jaXNjbzEbMBkGA1UEChMSZmFybWVyLmV4YW1wbGUuY29tMR4wHAYDVQQDExVj\nYS5mYXJtZXIuZXhhbXBsZS5jb20wHhcNMjMwOTE5MTc0NDAwWhcNMzMwOTE2MTc0\nNDAwWjB3MQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTEWMBQGA1UE\nBxMNU2FuIEZyYW5jaXNjbzEbMBkGA1UEChMSZmFybWVyLmV4YW1wbGUuY29tMR4w\nHAYDVQQDExVjYS5mYXJtZXIuZXhhbXBsZS5jb20wWTATBgcqhkjOPQIBBggqhkjO\nPQMBBwNCAATDXRstU0K7uUbPZuhwLfijUIL5KE3VIDwskiFodWuyoAyN72/4VPYh\nUW5PHY3RFHP7Z2/b/nfaJ7E32E/eUd3No20wazAOBgNVHQ8BAf8EBAMCAaYwHQYD\nVR0lBBYwFAYIKwYBBQUHAwIGCCsGAQUFBwMBMA8GA1UdEwEB/wQFMAMBAf8wKQYD\nVR0OBCIEIK7YorV7yy62ZgH4wsJatvF85ka7SOSTfXyk/0OI7ViwMAoGCCqGSM49\nBAMCA0kAMEYCIQCXKtvxbHG+TB+m5QjGF6Oq+zZeDdaV+qZ1kuS79ifvbQIhAJKv\n8jjrIkDXkVE/LfoyU/3KOCxu1cxIDxh3HMjCRDI2\n-----END CERTIFICATE-----\n"]
+            },
+            "httpOptions": {
+                "verify": false
+            }
+        }
+    }
+}

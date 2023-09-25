@@ -7,7 +7,7 @@
     "eventWaitTime":"30000",
     "APP_SECRET":"smarbolt-secret",
     "TOKEN_BEARER": "Bearer",
-    "MONGO_URL_SERVICE": "mongodb://admin:admin@smartbolt.eastus2.cloudapp.azure.com:30001/smartbolt?authSource=admin",
+    "MONGO_URL_SERVICE": "mongodb://admin:admin@20.51.241.42:27017/panificator?authSource=admin",
     "OPTS": { "useNewUrlParser": true,"useUnifiedTopology": true },
     "DBUSERNAME":"",
     "DBPASSWORD":"",
@@ -19,9 +19,9 @@
     "EMAIL_PASSWORD": "Esteem@123",
     "LOGIN_URL":"http://smartbolt.eastus2.cloudapp.azure.com:5000/api-docs",
     "ORG_DETAILS":{
-       "CHANNEL_NAME":"mychannel",
-       "ORG_NAME":"Operator",
-       "PEERS":["peer0.operator.example.com:7051"]
+       "CHANNEL_NAME":"bcmchannel",
+       "ORG_NAME":"Broker",
+       "PEERS":["peer0.broker.example.com:7051"]
     },
     "admins":[
       {
@@ -33,20 +33,27 @@
     "env":"",
     "TYPE_UTF":"utf8",
     "AFFILIATION_DEPT": ".department1",
-    "Operator":{
-         "ORG_CONN": "blockchain/artifacts/network-config-org1.json",
-         "ORG_NAME":"Operator",
-         "ORG_CA":"ca.operator.example.com",
-         "ORG_MSP":"OperatorMSP",
+    "Broker":{
+         "ORG_CONN": "blockchain/artifacts/connection-broker.json",
+         "ORG_NAME":"Broker",
+         "ORG_CA":"ca.broker.example.com",
+         "ORG_MSP":"BrokerMSP",
          "WALLET_TYPE":"Azure",
          "APP_WALLETDB_URL": "",
+         "admins":[
+            {
+              "username":"admin",
+              "secret":"adminpw",
+              "password":"adminpw"
+            }
+          ],
          "PEERS":[
             {
-               "PEER":"peer0.operator.example.com:7051",
-               "PEER_NAME":"peer0.operator.example.com"
+               "PEER":"peer0.broker.example.com:7051",
+               "PEER_NAME":"peer0.broker.example.com"
             }
          ],
-         "PEER0_WITHPORT": "peer0.operator.example.com:7051"
+         "PEER0_WITHPORT": "peer0.broker.example.com:7051"
     },
     "INFURA_PROJECT_ID":"2TAMqccchcK384Th6nGpf4VAEiE",
     "INFURA_PROJECT_SECRET":"0d7b3e394463a6b22ab9f0616b757f30",
