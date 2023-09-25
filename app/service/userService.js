@@ -230,7 +230,7 @@ const queryAllUsers = async function (req) {
 
 const checkUserExists = async function (orgType, orgName, userId) {
   let result = {}
-  let wallet = await connectionUtil.getWallet(orgType,orgName);
+  let wallet = await connectionUtil.getWallet(orgType);
   console.log("wallet",wallet);
   if(wallet == null){
     result.success = true;

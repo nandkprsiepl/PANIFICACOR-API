@@ -52,7 +52,7 @@ const User = require('../schema/userSchema');
         logger.debug('user - ****** START %s', JSON.stringify(userOb));
         let onboardUserResult = await userService.registerUser(userOb);
         logger.debug('registeruser - ****** result %s', onboardUserResult.onChainReg);
-        let message = "Organization with name "+ org.orgName+"  onboarded successfully having admin Id "+ orgAdminEmailId +" & password "+pass;
+        let message = "Organization with name "+ org.orgName+"  onboarded successfully having admin Id "+ org.email +" & password "+org.password;
         result = await helper.parseResponse(constants.SUCCESS, message, "", 200);
         //Send Mail
         if(onboardUserResult.onChainReg.success){

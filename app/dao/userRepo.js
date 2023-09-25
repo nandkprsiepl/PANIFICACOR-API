@@ -103,7 +103,7 @@ async function registerUser(user) {
     let adminUser = connectionUtil.getAdminDetailsForOrg(user.orgType);
 
     // Check to see if we've already enrolled the user.
-    const wallet = await connectionUtil.getWallet(user.orgType,user.orgName);
+    const wallet = await connectionUtil.getWallet(user.orgType);
     const userExists = await wallet.get(user.username);
     if (userExists) {
       logger.info('An identity for the user ' + user.username + ' already exists in the wallet');
@@ -113,8 +113,7 @@ async function registerUser(user) {
     await enrollAdminIdentity(user.orgName);
  
     // Fetch Admin identity from wallet
-    let adminWallet = await connectionUtil.getWallet(user.orgType);
-    const adminIdentity = await adminWallet.get(adminUser.username);
+    const adminIdentity = await wallet.get(adminUser.username);
     if (!adminIdentity) {
       logger.info('An identity for the admin user "admin" does not exist in the wallet');
       throw new Error('An identity for the user ' + adminUser.username + ' not exists in the wallet');
