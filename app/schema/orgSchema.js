@@ -6,7 +6,6 @@ const Schema = mongoose.Schema;
 // ====================================================================//
 
 const OrgSchema = new Schema({
-  _id: { type: Schema.Types.ObjectId, required: false },
   orgId: { type: String, required: false },
   orgName: { type: String, required: false },
   orgType: { type: String, required: false },
