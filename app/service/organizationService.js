@@ -25,7 +25,7 @@ const User = require('../schema/userSchema');
     try {
       logger.debug('onboardOrganization - ****** START ');
 
-      let userExist = await userService.checkUserExists(org.orgType,org.orgName,userId)
+      let userExist = await userService.checkUserExists(org.orgType,org.orgName,org.emailId)
       if(!userExist.success){
         return userExist;
       }
