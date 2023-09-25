@@ -48,20 +48,16 @@ let uploadFileMiddleware = util.promisify(uploadFile);
 
 const registerUser = async function (user) {
   try {
-    var { orgId, orgName, email, phone, status, userId, userName, password, role, organizationType } = user
-    const saltRounds = 10;
-    
+    var { orgId, orgName, email, phone, status, userId, userName, password, role, orgType } = user
     logger.debug('registerUser - ****** START %s', user.userName);
     var result = {}
-    let adminDetails = connectionUtil.getAdminDetails();
+    let adminDetails = connectionUtil.getAdminDetailsForOrg(user.orgType);
 
     logger.debug('queryUser - ****** START ');
     user.password = await helper.hashPassword(user)
     password = user.password;
-    user.status = constants.STATUS_ACTIVE
-    var status = constants.STATUS_ACTIVE;
-    var registerUserResult = {};
 
+    var registerUserResult = {};
     //Offchain Registration
     try {
       var enrollResult = {};
@@ -80,7 +76,7 @@ const registerUser = async function (user) {
 
         //Mongo Registration Organization
         await isConnected();
-        const userOb = new User({ _id: mongoose.Types.ObjectId(), userId, userName, orgId, orgName, role, password, email, phone, status, organizationType });
+        const userOb = new User({ _id: mongoose.Types.ObjectId(), userId, userName, orgId, orgName, role, password, email, phone, status, orgType });
         let saveUser = await userOb.save();
         console.log("saveuser", saveUser);
 
@@ -88,7 +84,7 @@ const registerUser = async function (user) {
         //Onchain Registration Blockchain
         let args = [JSON.stringify(user)]
         logger.debug('user - ****** START %s', args);
-        let resultOnChain = await chaincodeRepo.invokeChaincode(peers, channelName, chaincodeName, constants.CREATE_USER, args, adminDetails.username, orgNameBlockchain);
+        let resultOnChain = await chaincodeRepo.invokeChaincode(peers, channelName, chaincodeName, constants.CREATE_USER, args, adminDetails.username, orgType);
         logger.debug('registerUser - ****** result %s', resultOnChain);
         registerUserResult.onChainReg = resultOnChain;
       }

@@ -11,7 +11,7 @@ const UserSchema = new Schema({
   userName: { type: String, required: true },
   orgId: { type: String, required: true },
   orgName: { type: String, required: true },
-  organizationType:  {type: String, required: true},
+  orgType:  {type: String, required: true},
   role: {type: String,required: true},
   password: { type: String, required: true },
   email: { type: String, required: true },

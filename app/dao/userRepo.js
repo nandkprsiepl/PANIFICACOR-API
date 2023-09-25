@@ -98,12 +98,12 @@ async function registerUser(user) {
   try {
       user.username = user.userId;
       user.role = user.role;
-    const orgDetails = config[user.orgName];
-    const ca = connectionUtil.getCAService(user.orgName);
-    const adminUser = connectionUtil.getAdminDetails();
+    const orgDetails = config[user.orgType];
+    const ca = connectionUtil.getCAService(user.orgType);
+    let adminUser = connectionUtil.getAdminDetailsForOrg(user.orgType);
 
     // Check to see if we've already enrolled the user.
-    const wallet = await connectionUtil.getWallet(user.orgName);
+    const wallet = await connectionUtil.getWallet(user.orgType,user.orgName);
     const userExists = await wallet.get(user.username);
     if (userExists) {
       logger.info('An identity for the user ' + user.username + ' already exists in the wallet');
@@ -111,13 +111,10 @@ async function registerUser(user) {
     }
     //Enrolling Admin Identity if not exist    
     await enrollAdminIdentity(user.orgName);
-
-    // Get the network (channel) our contract is deployed to.
-    gateway = await chaincodeUtil.connectGateway(adminUser.username, user.orgName);
-    logger.info('Gateway fetched');
-    
+ 
     // Fetch Admin identity from wallet
-    const adminIdentity = await wallet.get(adminUser.username);
+    let adminWallet = await connectionUtil.getWallet(user.orgType);
+    const adminIdentity = await adminWallet.get(adminUser.username);
     if (!adminIdentity) {
       logger.info('An identity for the admin user "admin" does not exist in the wallet');
       throw new Error('An identity for the user ' + adminUser.username + ' not exists in the wallet');

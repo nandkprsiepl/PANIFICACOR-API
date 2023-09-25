@@ -24,63 +24,46 @@ const User = require('../schema/userSchema');
   const onboardOrganization = async function(org) {
     try {
       logger.debug('onboardOrganization - ****** START ');
-
       let userExist = await userService.checkUserExists(org.orgType,org.orgName,org.emailId)
       if(!userExist.success){
         return userExist;
       }
 
-      org.password = Math.random().toString(36).slice(-8);
-
      //Generate OrgID 
       let id = await genId()
       org.orgId = "ORG" + id;
       org.userId = org.emailId 
-      org.userName = org.orgAdminFirstName + " " + org.orgAdminLastName;
+      org.userName = org.firstName + " " + org.lastName;
       org.email= org.emailId;  
       org.status = constants.STATUS_ACTIVE
+      org.status = constants.STATUS_ACTIVE
+      org.password = Math.random().toString(36).slice(-8);
 
       //Mongo Registration Organization
       let organization = await decorateOrg(org);  
       let offchainRes = await onboardOrganizationOffchain(organization);
       console.log("offchainRes",offchainRes);
 
-      // await isConnected();
-      // let organization = await decorateOrg(org);  
-      // const organization = new Org({_id: mongoose.Types.ObjectId(),orgId, orgName, orgAdminFirstName, orgAdminLastName, orgAdminEmailId, phone, address, countryOfInc, stateOfInc, zipCode, buisnessType, status, role, organizationType});
-      // let saveOrg = await organization.save();
-      // console.log("saveuser",saveOrg);
-
       let result = await onboardOrganizationOnchain(organization);
       logger.debug('registerOrg - ****** result %s', JSON.stringify(result));
 
-      // var orgOb = {orgId, orgName, orgAdminFirstName, orgAdminLastName, orgAdminEmailId, phone,address, countryOfInc, stateOfInc, zipCode, buisnessType, organizationType, status ,role }
-      // let args = [JSON.stringify(orgOb)]
-      // logger.debug('org - ****** START %s', args);
-      //  result =await chaincodeRepo.invokeChaincode(peers,channelName,chaincodeName,constants.CREATE_ORG,args,adminDetails.username,org.orgName);
-      // logger.debug('registerOrg - ****** result %s', JSON.stringify(result));
-  // if(result.success){ 
-  //   const userOb = {orgId, orgName, email, phone, status ,userId, userName, password, role, organizationType }
-
-  //   logger.debug('user - ****** START %s', JSON.stringify(userOb));
-  //   console.log("userOb-->",userOb)
-  //   let onboardUserResult = await userService.registerUser(userOb);
-  //   logger.debug('registeruser - ****** result %s', onboardUserResult.onChainReg);
-  //   let message = "Organization with name "+ org.orgName+"  onboarded successfully having admin Id "+ orgAdminEmailId +" & password "+pass;
-  //   result = await helper.parseResponse(constants.SUCCESS, message, "", 200);
-    
-  //   //Send Mail
-  //   if(onboardUserResult.onChainReg.success){
-  //     logger.debug('Calling Sending Email service');
-  //     logger.debug('Calling Sending Email service');
-  //       await helper.sendOnboardingMail(userOb,org.userName)
-  //   }
-
-  // }else{
-  //   // result.message =  result.message[0].message;
-  //   result = await helper.parseResponse(constants.FAILURE, result.message, "", 200);         
-
-  // }   
+      if(result.success){ 
+        const userOb = await decorateUser(org)
+        logger.debug('user - ****** START %s', JSON.stringify(userOb));
+        let onboardUserResult = await userService.registerUser(userOb);
+        logger.debug('registeruser - ****** result %s', onboardUserResult.onChainReg);
+        let message = "Organization with name "+ org.orgName+"  onboarded successfully having admin Id "+ orgAdminEmailId +" & password "+pass;
+        result = await helper.parseResponse(constants.SUCCESS, message, "", 200);
+        //Send Mail
+        if(onboardUserResult.onChainReg.success){
+          logger.debug('Calling Sending Email service');
+          logger.debug('Calling Sending Email service');
+            await helper.sendOnboardingMail(userOb,org.userName)
+        }
+      }else{
+        // result.message =  result.message[0].message;
+        result = await helper.parseResponse(constants.FAILURE, result.message, "", 200);         
+      }   
       return result;
     } catch(err) {
       console.log("err",err)
@@ -130,6 +113,22 @@ const User = require('../schema/userSchema');
         orgOnchain.status = org.status;
      return orgOnchain
    }
+
+
+   const decorateUser = async function(org){
+    let user = {}
+        user.orgId = org.orgId;
+        user.orgName = org.orgName;
+        user.orgType = org.orgType;
+        user.email = org.emailId;
+        user.phone = org.phone;
+        user.status = org.status;
+        user.userId = org.emailId;
+        user.userName = org.userName;
+        user.password = org.password;
+        user.role = org.role;
+    return user
+  }
 
    const genId = async function(){
         let date = new Date();
