@@ -110,7 +110,7 @@ async function registerUser(user) {
       throw new Error('An identity for the user ' + user.username + ' already exists in the wallet');
     }
     //Enrolling Admin Identity if not exist    
-    await enrollAdminIdentity(user.orgName);
+    await enrollAdminIdentity(user.orgType);
  
     // Fetch Admin identity from wallet
     const adminIdentity = await wallet.get(adminUser.username);
