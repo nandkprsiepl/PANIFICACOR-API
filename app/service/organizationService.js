@@ -91,8 +91,8 @@ const User = require('../schema/userSchema');
    };
   
    const onboardOrganizationOnchain = async function(org){
-    let adminDetails = connectionUtil.getAdminDetailsForOrg(org.organizationType);
-    await userRepo.enrollAdminIdentity(org.organizationType);
+    let adminDetails = connectionUtil.getAdminDetailsForOrg(org.orgType);
+    await userRepo.enrollAdminIdentity(org.orgType);
     let args = [JSON.stringify(org)]
     logger.debug('org - ****** START %s', args);
     return chaincodeRepo.invokeChaincode(peers,channelName,chaincodeName,constants.CREATE_ORG,args,adminDetails.username,org.orgName);
