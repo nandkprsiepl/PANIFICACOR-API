@@ -86,7 +86,7 @@ const User = require('../schema/userSchema');
     if(offhainUserOb){
       let result= {};
       result.success = false
-      result.message = constants.ALREADY_EXISTS + org.orgType + "with Name" +org.orgName
+      result.message = constants.ALREADY_EXISTS + org.orgType + " with Name " +org.orgName
       return  result;
     }
 
