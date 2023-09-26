@@ -24,9 +24,9 @@ const User = require('../schema/userSchema');
   const onboardOrganization = async function(org) {
     try {
       logger.debug('onboardOrganization - ****** START ');
-      let result = await checkOrganizationExists(org);
-      if(result){
-        return result;
+      let orgExists = await checkOrganizationExists(org);
+      if(orgExists){
+        return orgExists;
       }
 
      //Generate OrgID 
