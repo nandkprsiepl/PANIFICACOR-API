@@ -43,6 +43,7 @@ CAPEM=organizations/peerOrganizations/broker.example.com/ca/ca.broker.example.co
 
 echo "$(json_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM $ORG_MSP $ORG_NAME $CHANNEL)" > organizations/peerOrganizations/broker.example.com/connection-broker.json
 echo "$(yaml_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM $ORG_MSP $ORG_NAME $CHANNEL)" > organizations/peerOrganizations/broker.example.com/connection-broker.yaml
+echo "$(json_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM $ORG_MSP $ORG_NAME $CHANNEL)" > ../artifacts/connection-broker.json
 
 ORG=farmer
 ORG_MSP=FarmerMSP
@@ -55,6 +56,7 @@ CAPEM=organizations/peerOrganizations/farmer.example.com/ca/ca.farmer.example.co
 
 echo "$(json_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM $ORG_MSP $ORG_NAME $CHANNEL)" > organizations/peerOrganizations/farmer.example.com/connection-farmer.json
 echo "$(yaml_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM $ORG_MSP $ORG_NAME $CHANNEL)" > organizations/peerOrganizations/farmer.example.com/connection-farmer.yaml
+echo "$(json_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM $ORG_MSP $ORG_NAME $CHANNEL)" > ../artifacts/connection-farmer.json
 
 
 ORG=cerealist
@@ -68,6 +70,7 @@ CAPEM=organizations/peerOrganizations/cerealist.example.com/ca/ca.cerealist.exam
 
 echo "$(json_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM $ORG_MSP $ORG_NAME $CHANNEL)" > organizations/peerOrganizations/cerealist.example.com/connection-cerealist.json
 echo "$(yaml_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM $ORG_MSP $ORG_NAME $CHANNEL)" > organizations/peerOrganizations/cerealist.example.com/connection-cerealist.yaml
+echo "$(json_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM $ORG_MSP $ORG_NAME $CHANNEL)" > ../artifacts/connection-cerealist.json
 
 
 ORG=mills
@@ -81,6 +84,7 @@ CAPEM=organizations/peerOrganizations/mills.example.com/ca/ca.mills.example.com-
 
 echo "$(json_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM $ORG_MSP $ORG_NAME $CHANNEL)" > organizations/peerOrganizations/mills.example.com/connection-mills.json
 echo "$(yaml_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM $ORG_MSP $ORG_NAME $CHANNEL)" > organizations/peerOrganizations/mills.example.com/connection-mills.yaml
+echo "$(json_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM $ORG_MSP $ORG_NAME $CHANNEL)" > ../artifacts/connection-mills.json
 
 
 ORG=baker
@@ -94,10 +98,4 @@ CAPEM=organizations/peerOrganizations/baker.example.com/ca/ca.baker.example.com-
 
 echo "$(json_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM $ORG_MSP $ORG_NAME $CHANNEL)" > organizations/peerOrganizations/baker.example.com/connection-baker.json
 echo "$(yaml_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM $ORG_MSP $ORG_NAME $CHANNEL)" > organizations/peerOrganizations/baker.example.com/connection-baker.yaml
-
-
-cp -r connection-broker.json ../artifacts/connection-broker.json
-cp -r connection-farmer.json ../artifacts/connection-farmer.json
-cp -r connection-cerealist.json ../artifacts/connection-cerealist.json
-cp -r connection-mills.json ../artifacts/connection-mills.json
-cp -r connection-baker.json ../artifacts/connection-baker.json
+echo "$(json_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM $ORG_MSP $ORG_NAME $CHANNEL)" > ../artifacts/connection-baker.json
