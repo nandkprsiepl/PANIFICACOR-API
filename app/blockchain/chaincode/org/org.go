@@ -27,7 +27,6 @@ type SmartContract struct {
 
 type ORG struct{
 	OrgId					 string     			`json:"orgId"`
-	OrgName     			 string					`json:"orgName"`
 	OrganizationType 	   	 string					`json:"organizationType"`
 	CompanyName				 string					`json:"companyName"`
 	CompanyBranch			 string					`json:"companyBranch"`	
@@ -219,7 +218,7 @@ func (s *SmartContract) queryOrgByOrganizationType(APIstub shim.ChaincodeStubInt
 
 func (s *SmartContract) queryOrgByOrganizationName(APIstub shim.ChaincodeStubInterface, args []string) sc.Response {
 	orgName := args[0]
-	queryString := fmt.Sprintf("{\"selector\":{\"docType\":\"Organization\",\"orgName\":\"%s\"}}", orgName)
+	queryString := fmt.Sprintf("{\"selector\":{\"docType\":\"Organization\",\"companyName\":\"%s\"}}", orgName)
 	queryResults, err := getQueryResultForQueryString(APIstub, queryString)
 	if err != nil {
 		return shim.Error(err.Error())
