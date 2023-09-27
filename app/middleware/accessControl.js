@@ -20,7 +20,46 @@ let checkOrgId = async (req, res, next) => {
     }
 };
 
+let checkOrgType = async (req, res, next) => {
+    if(req.orgName == req.params.organizationType){
+        return next();
+    }else{
+        res.status(constants.UNAUTHORIZED_STATUS)
+        return res.send({
+            success : false,
+            message: constants.ORG_FETCH_UNAUTHORIZED
+        })
+    }
+};
+
+let checkOrgName = async (req, res, next) => {
+    if(req.companyName == req.params.organizationName){
+        return next();
+    }else{
+        res.status(constants.UNAUTHORIZED_STATUS)
+        return res.send({
+            success : false,
+            message: constants.ORG_FETCH_UNAUTHORIZED
+        })
+    }
+};
+
+let checkRole = async (req, res, next) => {
+    if(req.role == constants.SUPERADMIN){
+        return next();
+    }else{
+        res.status(constants.UNAUTHORIZED_STATUS)
+        return res.send({
+            success : false,
+            message: constants.ORG_FETCH_UNAUTHORIZED
+        })
+    }
+};
+
 module.exports = {
-    checkOrgId
+    checkOrgId,
+    checkOrgType,
+    checkOrgName,
+    checkRole
 }
 

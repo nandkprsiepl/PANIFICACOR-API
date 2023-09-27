@@ -19,10 +19,10 @@ var upload = multer({
 var uploadmulter = upload.single('File');
 
 router.post('/api/organization',  organizationController.onboardOrganization);
-router.get('/api/organizations', checkAuth, organizationController.queryAllOrganizations);
+router.get('/api/organizations', checkAuth, AC.checkRole, organizationController.queryAllOrganizations);
 router.get('/api/organizationById/:organizationId', checkAuth, AC.checkOrgId ,organizationController.getOrganizationById);
-router.get('/api/organizationByType/:organizationType', checkAuth, organizationController.queryOrgByOrganizationType);
-router.get('/api/organizationByName/:organizationName', checkAuth, organizationController.queryOrgByOrganizationName);
+router.get('/api/organizationByType/:organizationType', checkAuth,  AC.checkOrgType, organizationController.queryOrgByOrganizationType);
+router.get('/api/organizationByName/:organizationName', checkAuth, AC.checkOrgName , organizationController.queryOrgByOrganizationName);
 router.post('/api/approve', checkAuth,   organizationController.approve);
 router.get('/api/getApprovedOrgs', checkAuth, organizationController.queryApprovedOrgs);
 router.get('/api/getApprovedOrgsByType/:type', checkAuth, organizationController.queryApprovedOrgsByType);

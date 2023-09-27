@@ -163,8 +163,8 @@ const User = require('../schema/userSchema');
   const queryAllOrganizations = async function(req) {
     try {
       logger.debug('queryAllOrganizations - ****** START ');
-      let args = [""];
-      let resp =  await chaincodeRepo.queryChaincode(peers,channelName,chaincodeName,args,"queryAllOrganisations",req.userId, req.orgName);
+      let args = [req.orgName];
+      let resp =  await chaincodeRepo.queryChaincode(peers,channelName,chaincodeName,args,"queryOrgByOrganizationType",req.userId, req.orgName);
       let result = await helper.parseResponse(constants.SUCCESS, constants.ORGANIZATION_DATA, JSON.parse(resp), 200);          
       return result;
     } catch(err) {

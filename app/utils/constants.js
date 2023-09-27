@@ -96,6 +96,7 @@ module.exports = {
   ALREADY_EXISTS : "Already Exist ",
 
   UNAUTHORIZED_STATUS:401,
-  ORG_FETCH_UNAUTHORIZED:"Not Authorized to fetch organization Details"
+  ORG_FETCH_UNAUTHORIZED:"Not Authorized to fetch organization Details",
+  SUPERADMIN:"SUPERADMIN"
 
 };
