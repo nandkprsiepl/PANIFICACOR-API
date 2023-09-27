@@ -94,3 +94,10 @@ CAPEM=organizations/peerOrganizations/baker.example.com/ca/ca.baker.example.com-
 
 echo "$(json_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM $ORG_MSP $ORG_NAME $CHANNEL)" > organizations/peerOrganizations/baker.example.com/connection-baker.json
 echo "$(yaml_ccp $ORG $P0PORT $CAPORT $PEERPEM $CAPEM $ORG_MSP $ORG_NAME $CHANNEL)" > organizations/peerOrganizations/baker.example.com/connection-baker.yaml
+
+
+cp -r connection-broker.json ../artifacts/connection-broker.json
+cp -r connection-farmer.json ../artifacts/connection-farmer.json
+cp -r connection-cerealist.json ../artifacts/connection-cerealist.json
+cp -r connection-mills.json ../artifacts/connection-mills.json
+cp -r connection-baker.json ../artifacts/connection-baker.json
