@@ -34,10 +34,10 @@ module.exports = (req, res, next) => {
     } else {
       req.userId = decoded.userId;
       req.orgName = decoded.orgName;
-      req.orgType = decoded.orgType;
+      req.companyName = decoded.companyName;
       req.role = decoded.role;
       req.orgId = decoded.orgId;
-      logger.debug(util.format('Decoded from JWT token: userId - %s, orgname - %s , orgType %s , orgId %s', decoded.userId, decoded.orgName,decoded.orgType,decoded.orgId));
+      logger.debug(util.format('Decoded from JWT token: userId - %s, orgname - %s , companyName %s , orgId %s', decoded.userId, decoded.orgName,decoded.companyName,decoded.orgId));
       return next();
     }
   });
