@@ -55,6 +55,94 @@
          ],
          "PEER0_WITHPORT": "peer0.broker.example.com:7051"
     },
+    "Cerealista":{
+      "ORG_CONN": "blockchain/artifacts/connection-broker.json",
+      "ORG_NAME":"Broker",
+      "ORG_CA":"ca.broker.example.com",
+      "ORG_MSP":"BrokerMSP",
+      "WALLET_TYPE":"Azure",
+      "APP_WALLETDB_URL": "",
+      "admins":[
+         {
+           "username":"admin",
+           "secret":"adminpw",
+           "password":"adminpw"
+         }
+       ],
+      "PEERS":[
+         {
+            "PEER":"peer0.broker.example.com:7051",
+            "PEER_NAME":"peer0.broker.example.com"
+         }
+      ],
+      "PEER0_WITHPORT": "peer0.broker.example.com:7051"
+    },
+    "Farmer":{
+      "ORG_CONN": "blockchain/artifacts/connection-broker.json",
+      "ORG_NAME":"Broker",
+      "ORG_CA":"ca.broker.example.com",
+      "ORG_MSP":"BrokerMSP",
+      "WALLET_TYPE":"Azure",
+      "APP_WALLETDB_URL": "",
+      "admins":[
+         {
+           "username":"admin",
+           "secret":"adminpw",
+           "password":"adminpw"
+         }
+       ],
+      "PEERS":[
+         {
+            "PEER":"peer0.broker.example.com:7051",
+            "PEER_NAME":"peer0.broker.example.com"
+         }
+      ],
+      "PEER0_WITHPORT": "peer0.broker.example.com:7051"
+    },
+    "Mills":{
+      "ORG_CONN": "blockchain/artifacts/connection-broker.json",
+      "ORG_NAME":"Broker",
+      "ORG_CA":"ca.broker.example.com",
+      "ORG_MSP":"BrokerMSP",
+      "WALLET_TYPE":"Azure",
+      "APP_WALLETDB_URL": "",
+      "admins":[
+         {
+           "username":"admin",
+           "secret":"adminpw",
+           "password":"adminpw"
+         }
+       ],
+      "PEERS":[
+         {
+            "PEER":"peer0.broker.example.com:7051",
+            "PEER_NAME":"peer0.broker.example.com"
+         }
+      ],
+      "PEER0_WITHPORT": "peer0.broker.example.com:7051"
+    },
+    "Baker":{
+      "ORG_CONN": "blockchain/artifacts/connection-broker.json",
+      "ORG_NAME":"Broker",
+      "ORG_CA":"ca.broker.example.com",
+      "ORG_MSP":"BrokerMSP",
+      "WALLET_TYPE":"Azure",
+      "APP_WALLETDB_URL": "",
+      "admins":[
+         {
+           "username":"admin",
+           "secret":"adminpw",
+           "password":"adminpw"
+         }
+       ],
+      "PEERS":[
+         {
+            "PEER":"peer0.broker.example.com:7051",
+            "PEER_NAME":"peer0.broker.example.com"
+         }
+      ],
+      "PEER0_WITHPORT": "peer0.broker.example.com:7051"
+    },
     "INFURA_PROJECT_ID":"2TAMqccchcK384Th6nGpf4VAEiE",
     "INFURA_PROJECT_SECRET":"0d7b3e394463a6b22ab9f0616b757f30",
     "INFURA_PROJECT_HOST":"ipfs.infura.io",
