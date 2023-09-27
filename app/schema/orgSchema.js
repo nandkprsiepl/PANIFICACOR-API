@@ -7,7 +7,6 @@ const Schema = mongoose.Schema;
 
 const OrgSchema = new Schema({
   orgId: { type: String, required: false },
-  orgName: { type: String, required: false },
   orgType: { type: String, required: false },
   companyName: { type: String, required: false },
   companyBranch: { type: String, required: false },

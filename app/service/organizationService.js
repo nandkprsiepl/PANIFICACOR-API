@@ -52,7 +52,7 @@ const User = require('../schema/userSchema');
         logger.debug('user - ****** START %s', JSON.stringify(userOb));
         let onboardUserResult = await userService.registerUser(userOb);
         logger.debug('registeruser - ****** result %s', onboardUserResult.onChainReg);
-        let message = "Organization with name "+ org.orgName+"  onboarded successfully having admin Id "+ org.email +" & password "+org.password;
+        let message = "Organization with name "+ org.companyName+"  onboarded successfully having admin Id "+ org.email +" & password "+org.password;
         result = await helper.parseResponse(constants.SUCCESS, message, "", 200);
         //Send Mail
         if(onboardUserResult.onChainReg.success){
@@ -74,17 +74,17 @@ const User = require('../schema/userSchema');
    };
 
    const checkOrganizationExists = async function(org){
-    let userExist = await userService.checkUserExists(org.orgType,org.orgName,org.emailId)
+    let userExist = await userService.checkUserExists(org.orgType,org.companyName,org.emailId)
     if(!userExist.success){
       return userExist
     }
-    
+
     await isConnected();
-    let offhainUserOb = await Org.findOne({ orgType: org.orgType , orgName : org.orgName, companyBranch: org.companyBranch})
+    let offhainUserOb = await Org.findOne({ orgType: org.orgType , companyName : org.companyName, companyBranch: org.companyBranch})
     if(offhainUserOb){
       let result= {};
       result.success = false
-      result.message = constants.ALREADY_EXISTS + org.orgType + " with Name " +org.orgName
+      result.message = constants.ALREADY_EXISTS + org.orgType + " with Name " +org.companyName
       return  result;
     }
    }
@@ -107,7 +107,6 @@ const User = require('../schema/userSchema');
    const decorateOrg = async function(org){
      let orgOnchain = {}
         orgOnchain.orgId = org.orgId;
-        orgOnchain.orgName = org.orgName;
         orgOnchain.orgType = org.orgType;
         orgOnchain.companyName = org.companyName;
         orgOnchain.companyBranch = org.companyBranch;
@@ -134,7 +133,7 @@ const User = require('../schema/userSchema');
    const decorateUser = async function(org){
     let user = {}
         user.orgId = org.orgId;
-        user.orgName = org.orgName;
+        user.orgName = org.companyName;
         user.orgType = org.orgType;
         user.email = org.emailId;
         user.phone = org.phone;
