@@ -145,7 +145,7 @@ services:
     command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.orderer.example.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/priv_sk -b admin:adminpw -d'
     volumes:
       - ../organizations/fabric-ca/ordererOrg:/etc/hyperledger/fabric-ca-server
-      - ../organizations/peerOrganizations/orderer.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
+      - ../organizations/ordererOrganizations/example.com/ca/:/etc/hyperledger/fabric-ca-server-config
     container_name: ca_orderer
     networks:
       - test
