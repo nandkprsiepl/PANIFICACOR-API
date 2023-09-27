@@ -119,8 +119,8 @@ const authenticateUser = async function (req) {
       if (offchainres) {
         const token = jwt.sign({
           userId: req.body.userId,
-          orgType: offhainUserOb.orgType,
-          orgName : offhainUserOb.orgName,
+          orgName : offhainUserOb.orgType,
+          companyName: offhainUserOb.orgName,
           orgId : offhainUserOb.orgId,
           role : offhainUserOb.role
         }, config[constants.APP_SECRET])
