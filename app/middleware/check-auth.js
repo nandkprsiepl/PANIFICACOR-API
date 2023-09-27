@@ -34,6 +34,9 @@ module.exports = (req, res, next) => {
     } else {
       req.userId = decoded.userId;
       req.orgName = decoded.orgName;
+      req.orgType = decoded.orgType;
+      req.role = decoded.role;
+      req.orgId = decoded.orgId;
       logger.debug(util.format('Decoded from JWT token: userId - %s, orgname - %s', decoded.userId, decoded.orgName));
       return next();
     }

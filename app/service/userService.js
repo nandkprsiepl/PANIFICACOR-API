@@ -116,11 +116,13 @@ const authenticateUser = async function (req) {
     if (offhainUserOb != null) {
       let offchainres = await bcrypt.compare(user.password, offhainUserOb.password)
       logger.debug('offchainres auth - ****** result %s', offchainres.toString());
-
       if (offchainres) {
         const token = jwt.sign({
           userId: req.body.userId,
-          orgName: orgNameBlockchain,
+          orgType: offchainres.orgType,
+          orgName : offchainres.orgName,
+          orgId : offchainres.orgId,
+          role : offchainres.role
         }, config[constants.APP_SECRET])
         let result = {}
         result = await helper.parseResponse(constants.SUCCESS, constants.LOGIN_SUCCESS, offhainUserOb, 200);

@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const organizationController = require('../controller/organizationController');
 const multer = require('multer'); 
-
+const AC = require('../middleware/accessControl')
 
 var storage = multer.diskStorage({
     destination: function (req, File, cb) {
@@ -20,7 +20,7 @@ var uploadmulter = upload.single('File');
 
 router.post('/api/organization',  organizationController.onboardOrganization);
 router.get('/api/organizations', checkAuth, organizationController.queryAllOrganizations);
-router.get('/api/organizationById/:organizationId', checkAuth, organizationController.getOrganizationById);
+router.get('/api/organizationById/:organizationId', checkAuth, AC.checkOrgId ,organizationController.getOrganizationById);
 router.get('/api/organizationByType/:organizationType', checkAuth, organizationController.queryOrgByOrganizationType);
 router.get('/api/organizationByName/:organizationName', checkAuth, organizationController.queryOrgByOrganizationName);
 router.post('/api/approve', checkAuth,   organizationController.approve);
