@@ -80,7 +80,7 @@ const User = require('../schema/userSchema');
     }
 
     await isConnected();
-    let offhainUserOb = await Org.findOne({ orgType: org.orgType , companyName : org.companyName, companyBranch: org.companyBranch})
+    let offhainUserOb = await Org.findOne({ organizationType: org.orgType , companyName : org.companyName, companyBranch: org.companyBranch})
     if(offhainUserOb){
       let result= {};
       result.success = false
