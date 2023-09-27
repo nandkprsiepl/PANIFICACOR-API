@@ -119,10 +119,10 @@ const authenticateUser = async function (req) {
       if (offchainres) {
         const token = jwt.sign({
           userId: req.body.userId,
-          orgType: offchainres.orgType,
-          orgName : offchainres.orgName,
-          orgId : offchainres.orgId,
-          role : offchainres.role
+          orgType: offhainUserOb.orgType,
+          orgName : offhainUserOb.orgName,
+          orgId : offhainUserOb.orgId,
+          role : offhainUserOb.role
         }, config[constants.APP_SECRET])
         let result = {}
         result = await helper.parseResponse(constants.SUCCESS, constants.LOGIN_SUCCESS, offhainUserOb, 200);
