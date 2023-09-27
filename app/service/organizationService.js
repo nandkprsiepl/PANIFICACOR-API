@@ -108,6 +108,7 @@ const User = require('../schema/userSchema');
      let orgOnchain = {}
         orgOnchain.orgId = org.orgId;
         orgOnchain.organizationType = org.orgType;
+        orgOnchain.orgType = org.orgType;
         orgOnchain.companyName = org.companyName;
         orgOnchain.companyBranch = org.companyBranch;
         orgOnchain.phone = org.phone;
