@@ -42,7 +42,7 @@ const User = require('../schema/userSchema');
       //Mongo Registration Organization
       let organization = await decorateOrg(org);  
       let offchainRes = await onboardOrganizationOffchain(organization);
-      console.log("offchainRes",offchainRes);
+      logger.debug('registerOrg - ****** onboardOrganizationOffchain %s', JSON.stringify(offchainRes));
 
       let result = await onboardOrganizationOnchain(organization);
       logger.debug('registerOrg - ****** result %s', JSON.stringify(result));
@@ -74,23 +74,19 @@ const User = require('../schema/userSchema');
    };
 
    const checkOrganizationExists = async function(org){
-    
     let userExist = await userService.checkUserExists(org.orgType,org.orgName,org.emailId)
     if(!userExist.success){
       return userExist
     }
-
+    
     await isConnected();
-    let offhainUserOb = await Org.findOne({ orgType: org.orgType , orgName : org.orgName})
-    console.log("offhainUserOb",offhainUserOb);
+    let offhainUserOb = await Org.findOne({ orgType: org.orgType , orgName : org.orgName, companyBranch: org.companyBranch})
     if(offhainUserOb){
       let result= {};
       result.success = false
       result.message = constants.ALREADY_EXISTS + org.orgType + " with Name " +org.orgName
       return  result;
     }
-
-
    }
   
    const onboardOrganizationOnchain = async function(org){
