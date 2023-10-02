@@ -19,7 +19,7 @@
     "EMAIL_PASSWORD": "Esteem@123",
     "LOGIN_URL":"http://smartbolt.eastus2.cloudapp.azure.com:5000/api-docs",
     "ORG_DETAILS":{
-       "CHANNEL_NAME":"bcmchannel",
+       "CHANNEL_NAME":"commonchannel",
        "ORG_NAME":"Broker",
        "PEERS":["peer0.broker.example.com:7051"]
     },
